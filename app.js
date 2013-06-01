@@ -13,6 +13,11 @@ var app = express()
   , server = http.createServer(app)
   , io = socketio.listen(server);
 
+io.configure(function () {
+  io.set("transports", ["xhr-polling"]);
+  io.set("polling duration", 10);
+});
+
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
   app.set('views', __dirname + '/views');
