@@ -6,10 +6,14 @@
     "start": "node app"
   },
   "dependencies": {
-    "express": "3.0.0rc3",
+    "express": "3.0.x",
     "ejs": "*",
     "async": "*",
     "socket.io": "*",
     "mongoose": "*"
+  },
+  "engines": {
+    "node": "0.8.x",
+    "npm": "1.2.x"
   }
 }
