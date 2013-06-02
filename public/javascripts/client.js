@@ -94,12 +94,12 @@ $(function() {
   var askQuestionBlock = $([
     "<div class='ihq-popup-window' style='position: absolute;z-index:100000;'>",
       "<div class='ihq-repeat'>",
-        "<button class='repeat-btn ihq-btn'>再重說一次</button>",
+        "<button class='repeat-btn ihq-btn ihq-btn-info'>請再重複一次</button>",
       "</div>",
       "<div>",
         '<div class="ihq-enter-question">輸入問題</div>',
         "<input type='text' class='question-text'></input>",
-        "<button class='question-btn ihq-btn'>送出問題</button>",
+        "<button class='question-btn ihq-btn ihq-btn-info'>送出</button>",
       "</div>",
     "</div>"].join(""));
   $("body").append(askQuestionBlock);
