@@ -1,28 +1,27 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
+    <title>我有問題</title>
     <link rel='stylesheet' href='/stylesheets/todc-bootstrap.css' />
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <div class="row">
-      <h1><%= title %></h1>
-      <div class="section">
-        <form method="post" action="/create">
-          <legend>1. 請輸入HTML Slide網址</legend>
-          <input type="text" name="url" placeholder="輸入HTML Slide網址"> </br>
-          <button class="btn" type="sumbit">產生script</button>
-        </form>
-      </div>
-      <div class="section">
-        <legend>2. 複製下面script到<code>&lt;/body&gt;</code>前</legend>
-        <div class="script">
-          &lt;script type="text/javascript" src="/javascripts/dependencies.js"&gt;&lt;/script &gt;
+    <form method="post" action="/create">
+      <div class="row">
+        <h1>我有問題 iHaveQuestion</h1>
+        <div class="section">
+            <legend>1. 請輸入HTML Slide網址</legend>
+            <input type="text" name="url" placeholder="輸入HTML Slide網址">
         </div>
+        <div class="section">
+          <legend>2. 複製下面 HTML 標記到 <code>&lt;/body&gt;</code> 前</legend>
+          <div class="script">
+            &lt;script type="text/javascript" src="<%=  embedUrl %>"&gt;&lt;/script &gt;
+          </div>
+        </div>
+        <button class="btn btn-info start" type="submit">開始上課</button>
       </div>
-      <button class="btn btn-info start" type="button">開始上課</button>
-    </div>
+    </form>
     <script type="text/javascript" src="/javascripts/dependencies.js"></script>
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
   </body>

@@ -4,7 +4,9 @@ var helper = require('./helper')
 
 // Homepage.
 exports.index = function(req, res){
-  res.render('index', { title: 'Express' });
+  var embedUrl = req.protocol + "://" + req.get('host') + req.url +
+      'javascripts/client.js';
+  res.render('index', { embedUrl: embedUrl});
 };
 
 // Lecturer page.
