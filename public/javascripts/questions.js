@@ -100,7 +100,7 @@ var QuestionView = Backbone.View.extend({
     if ('server' != $("body").attr("role")) {
       return;
     }
-    var id = $(event.target).parent().attr('mid');
+    var id = $(event.target).parents('.one-question').attr('mid');
     var model = this.collection.get(id);
     var state = model.get('state');
     model.set('state', 1);
@@ -109,7 +109,7 @@ var QuestionView = Backbone.View.extend({
     socket.emit('server:answer', model.id);
   },
   plusOneQuestion: function(event) {
-    var id = $(event.target).parent().attr('mid');
+    var id = $(event.target).parents('.one-question').attr('mid');
     var model = this.collection.get(id);
     var count = model.get('count');
     model.set('count', count + 1);
