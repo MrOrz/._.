@@ -52,9 +52,6 @@ $(function() {
   var askState = 0;
 
   function updatePage(urlHash) {
-    if (window.location.hash == urlHash) {
-      return;
-    }
     // show pointers
     $('.ihq-pointer').remove();
     for (var i = 0; i < questionCollection.length; ++i) {
