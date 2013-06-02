@@ -36,14 +36,3 @@ exports.create = function(req, res){
   // Redirect the lecturer to his/her dashboard.
   res.redirect('/dashboard/'+room.id);
 }
-
-// Handling questions
-exports.getQuestions = function(req, res){
-  console.log('get questions:', req.params.roomId);
-}
-exports.postQuestions = function(req, res){
-  console.log('create questions:', req.params.roomId);
-}
-exports.putQuestions = function(req, res){
-  console.log('created room param:', req.params.roomId);
-}

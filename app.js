@@ -63,11 +63,6 @@ app.get('/', controllers.index);
 app.post('/create', controllers.create);
 app.get('/dashboard/:id', controllers.dashboard);
 
-// TODO: remove them.
-app.get('/questions/:roomId', controllers.getQuestions);
-app.post('/questions/:roomId', controllers.postQuestions);
-app.put('/questions/:roomId', controllers.putQuestions);
-
 server.listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
 });
