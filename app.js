@@ -4,7 +4,8 @@
  */
 
 var express = require('express')
-  , routes = require('./routes')
+  , controllers = require('./app/controllers')
+  , storage = require('./app/storage')
   , http = require('http')
   , path = require('path')
   , socketio = require('socket.io')
@@ -38,8 +39,8 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-app.get('/', routes.index);
-app.get('/dashboard/:id', routes.dashboard);
+app.get('/', controllers.index);
+app.get('/dashboard/:id', controllers.dashboard);
 
 server.listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
