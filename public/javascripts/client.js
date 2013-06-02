@@ -10,7 +10,7 @@ $(function() {
       '<div class="ihg-tool">',
         '<i class="icon-search">',
         '</i>',
-        '<div> class="ask"',
+        '<div class="ask">',
         '</div>',
       '</div>',
       '<div class="ihq-question-queue">',

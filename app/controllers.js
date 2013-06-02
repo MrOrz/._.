@@ -5,7 +5,7 @@ var helper = require('./helper')
 // Homepage.
 exports.index = function(req, res){
   var embedUrl = req.protocol + "://" + req.get('host') + req.url +
-      'javascripts/client.js';
+      'c.js';
   res.render('index', { embedUrl: embedUrl});
 };
 
@@ -37,13 +37,6 @@ exports.create = function(req, res){
   res.redirect('/dashboard/'+room.id);
 }
 
-// Handling questions
-exports.getQuestions = function(req, res){
-  console.log('get questions:', req.params.roomId);
-}
-exports.postQuestions = function(req, res){
-  console.log('create questions:', req.params.roomId);
-}
-exports.putQuestions = function(req, res){
-  console.log('created room param:', req.params.roomId);
+exports.serveClient = function(req, res){
+  res.sendfile("public/javascripts/clientload.js");
 }
