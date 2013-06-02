@@ -69,7 +69,12 @@ var QuestionView = Backbone.View.extend({
     }
   },
   addAllQuestions: function() {
-    var that = this;
+    var that = this;/*
+    if (this.collection.length != 0) {
+      []++;
+    } else {
+      console.log("this.local", window.location);
+    }*/
     this.collection.forEach(function(model){
       that.addQuestion(model);
     });
