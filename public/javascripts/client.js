@@ -36,6 +36,11 @@ $(function() {
     var obj = $("<div class='pointer' style='position: absolute; width: 100px; height: 100px; background: rgba(255, 0, 0, 0.3);'></div>");
     obj.css("left", model.get("location").x);
     obj.css("top", model.get("location").y);
+    if (0 == model.get('type')) {
+      obj.attr('title', '請再重複一次');
+    } else {
+      obj.attr('title', model.get('str'));
+    }
     obj.attr("mid", model.cid);
     $('body').append(obj);
   }
