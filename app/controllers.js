@@ -20,7 +20,10 @@ exports.dashboard = function(req, res){
   if(!isLecturer){
     res.redirect('/')
   }
-  res.render('dashboard', {roomId: roomId});
+  res.render('dashboard', {
+    roomId: roomId,
+    studentUrl: roommanager.get(roomId).clientUrl
+  });
 };
 
 // Lecturer creating new slide.

@@ -25,8 +25,8 @@ io.configure(function () {
     console.log('Handshake', handshakeData);
     var roomId = handshakeData.query.roomId;
 
-    if(!roomId){
-      callback(null, false);
+    if(!roomId || !roommanager.get(roomId)){
+      callback("Invalid Room ID.", false);
     }
 
     // Check cookie.
