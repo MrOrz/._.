@@ -35,7 +35,7 @@ $(function() {
   });
 
   function addPointer(model) {
-    var obj = $("<div class='pointer' style='position: absolute;'></div>");
+    var obj = $("<div class='pointer' style='position: absolute; width: 100px; height: 100px; background: rgba(255, 0, 0, 0.3);'></div>");
     obj.css("left", model.get("location").x);
     obj.css("top", model.get("location").y);
     obj.attr("mid", model.cid);
