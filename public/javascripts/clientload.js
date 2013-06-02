@@ -21,7 +21,7 @@
     scriptList.shift();
   }
   function loadStyle() {
-    if (0 == stypleList.length) {
+    if (0 == styleList.length) {
       return;
     }
     var s = document.createElement('link');
