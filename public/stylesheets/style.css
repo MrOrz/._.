@@ -43,12 +43,14 @@ input{
 }
 
 .question-queue{
-	width:100%;
-	height:75%;
+	width:302px;
+	height:470px;
 	margin-top: 20px;
 	margin-bottom: 20px;
-	height: 100%;
+	/*height: 100%;*/
 	/*float: right;*/
+	overflow-y: auto;
+	overflow-x: hidden;
 }
 
 .slide-window{
