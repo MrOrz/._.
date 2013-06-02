@@ -2,7 +2,6 @@ body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
-
 a {
   color: #00B7FF;
 }
@@ -10,4 +9,35 @@ a {
 .section{
 	margin-bottom: 30px;
 	padding-top: 20px;
+}
+input{
+
+}
+
+.btn{
+	margin-top: 10px;
+}
+
+.start{
+	width:200px;
+	height: 50px;
+	margin-top: 10px;
+	font-size: 22px;
+}
+.row{
+	width:600px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.script{
+	margin: 0;
+	width: 500px;
+	background: rgba(211,211,211,0.3);
+	width: 100%;
+}
+legend{
+	margin-bottom: 5px;
+}
+input{
+	width: 100%;
 }

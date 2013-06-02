@@ -2,30 +2,26 @@
 <html>
   <head>
     <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/todc-bootstrap.css' />
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <div class="row">
-      <!-- <div class="controls">
-        <input class="input-block-level span12" type="text" placeholder=".input-block-level">
-      </div> -->
-      <div class="span10">
+    <div class="row">      
+      <h1><%= title %></h1>
+      <div class="section">
         <form>
-        <fieldset class="section">
-          <legend>1.請輸入HTML Slide網址</legend>
-          <!-- <label>Label name</label> -->
-          <input type="text" placeholder="輸入HTML Slide網址">          
-        </fieldset>
-        <fieldset class="section">
-          <legend>2.複製貼上下面tag到</body>前</legend>
-          <!-- <label>Label name</label> -->
-          <input type="text" placeholder="輸入HTML Slide網址">          
-        </fieldset>
+            <legend>1.請輸入HTML Slide網址</legend>
+            <input type="text" placeholder="輸入HTML Slide網址"> </br>
+            <button class="btn" type="sumbit">產生script</button>
         </form>
       </div>
-      <button class="btn btn-success" type="button">Large button</button>
-
+      <div class="section">
+        <legend>2.複製下面script到<code>&lt;/body&gt;</code>前</legend>
+        <div class="script">
+          &lt;script type="text/javascript" src="/javascripts/dependencies.js"&gt;&lt;/script &gt;
+        </div>
+      </div>
+      <button class="btn btn-success start" type="button">開始上課</button>
     </div>
     <script type="text/javascript" src="/javascripts/dependencies.js"></script>
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
