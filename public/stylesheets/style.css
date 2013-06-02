@@ -92,21 +92,24 @@ input{
 }
 
 .plus, .delete{
-	width: 35px;
-	height: 35px;
 	margin-left: 2px;
 	vertical-align: top;
 	background: rgba(255, 179, 179, 1);
 	/*display: none;*/
 }
 
+.plus .delete{
+  height: 15px;
+  width: 30px;
+}
 .plus{
   line-height: 25px;
   text-align: center;
   border-radius: 3px;
   box-shadow: 0px 1px 2px black;
 }
-.plus:hover{
+
+.ihq-tool-box .plus:hover{
   cursor: pointer;
   background: rgba(255, 124, 124, 1);
 }
@@ -176,6 +179,9 @@ input{
 .ihq-tool-box .plus{
   width:25px;
   height: 25px;
+  margin-left: 2px;
+  vertical-align: top;
+  background: rgba(255, 179, 179, 1);
 }
 
 .ihq-enter-question{
