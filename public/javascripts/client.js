@@ -34,7 +34,7 @@ $(function() {
   });
 
   function addPointer(model) {
-    var obj = $("<div class='pointer' style='position: absolute; width: 100px; height: 100px; background: rgba(255, 0, 0, 0.3);'></div>");
+    var obj = $("<div class='ihq-pointer' style='position: absolute;'><i class='icon-map-marker'></i></div>");
     obj.css("left", model.get("location").x);
     obj.css("top", model.get("location").y);
     if (0 == model.get('type')) {
@@ -54,7 +54,7 @@ $(function() {
 
   function updatePage(urlHash) {
     // show pointers
-    $('.pointer').remove();
+    $('.ihq-pointer').remove();
     for (var i = 0; i < questionCollection.length; ++i) {
       var model = questionCollection.at(i);
       console.log(model.get('location'));
@@ -98,12 +98,12 @@ $(function() {
   var askQuestionBlock = $([
     "<div class='ihq-popup-window' style='position: absolute;z-index:100000;'>",
       "<div class='ihq-repeat'>",
-        "<button class='repeat-btn ihq-btn ihq-btn-info'>請再重複一次</button>",
+        "<button class='repeat-btn ihq-btn ihq-btn-primary'>請再重複一次</button>",
       "</div>",
       "<div>",
         '<div class="ihq-enter-question">輸入問題</div>',
         "<input type='text' class='question-text'></input>",
-        "<button class='question-btn ihq-btn ihq-btn-info'>送出</button>",
+        "<button class='question-btn ihq-btn ihq-btn-primary'>送出</button>",
       "</div>",
     "</div>"].join(""));
   $("body").append(askQuestionBlock);

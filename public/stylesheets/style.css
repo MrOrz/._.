@@ -10,9 +10,6 @@ a {
 	margin-bottom: 30px;
 	padding-top: 20px;
 }
-input{
-
-}
 
 .btn{
 	margin-top: 10px;
@@ -90,17 +87,39 @@ input{
 .content:hover{
 	background: rgba(226, 246, 255, 0.8);
 }
-.plus, .delete,.content{
+.desc{
+  width:35px;
+  height:35px;
+}
+.desc, .content{
 	display: inline-block;
 }
 
-.plus, .delete{
-	width: 35px;
-	height: 35px;
+.plus{
+  background: rgba(255, 179, 179, 1);
+  /*display: none;*/
+}
+
+.delete{
+  background: rgba(240, 150, 79, 1);
+}
+
+.plus .delete{
 	margin-left: 2px;
-	vertical-align: top;
-	background: rgba(255, 179, 179, 0.5);
-	/*display: none;*/
+  height: 15px;
+  width: 30px;
+  margin-bottom: 5px;
+}
+.plus{
+  line-height: 25px;
+  text-align: center;
+  border-radius: 3px;
+  box-shadow: 0px 1px 2px black;
+}
+
+.ihq-tool-box .plus:hover{
+  cursor: pointer;
+  background: rgba(255, 124, 124, 1);
 }
 
 .clock{
@@ -161,9 +180,16 @@ input{
   height: 100%;
   font-size: 14px;
 }
+
+.ihq-tool-box .content:hover{
+  background: white;
+}
 .ihq-tool-box .plus{
   width:25px;
   height: 25px;
+  margin-left: 2px;
+  vertical-align: top;
+  background: rgba(255, 179, 179, 1);
 }
 
 .ihq-enter-question{
@@ -182,7 +208,7 @@ input{
 }
 .ihq-popup-window input{
   width: 130px;
-  margin-left: 10px;
+  margin-left: 5px;
 }
 
 .ihq-popup-window button{
@@ -447,6 +473,103 @@ input{
   background-color: #5bc0de;
   background-color: #5bc0de \9;
 }
+.ihq-btn-primary {
+  border: 1px solid #3079ed;
+  color: #ffffff;
+  background-color: #4b8cf7;
+  background-image: -moz-linear-gradient(top, #4d90fe, #4787ed);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#4d90fe), to(#4787ed));
+  background-image: -webkit-linear-gradient(top, #4d90fe, #4787ed);
+  background-image: -o-linear-gradient(top, #4d90fe, #4787ed);
+  background-image: linear-gradient(to bottom, #4d90fe, #4787ed);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff4d90fe', endColorstr='#ff4787ed', GradientType=0);
+  *background-color: #4d90fe;
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+.ihq-btn-primary:hover,
+.ihq-btn-primary:active,
+.ihq-btn-primary.active,
+.ihq-btn-primary:focus {
+  border: 1px solid #196aeb;
+  color: #ffffff;
+  background-color: #4186f6;
+  background-image: -moz-linear-gradient(top, #4d90fe, #3078eb);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#4d90fe), to(#3078eb));
+  background-image: -webkit-linear-gradient(top, #4d90fe, #3078eb);
+  background-image: -o-linear-gradient(top, #4d90fe, #3078eb);
+  background-image: linear-gradient(to bottom, #4d90fe, #3078eb);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff4d90fe', endColorstr='#ff3078eb', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+  background-color: #3078eb;
+  background-color: #3078eb \9;
+}
+.ihq-btn-primary:active,
+.ihq-btn-primary.active {
+  border: 1px solid #135fd7;
+  background-color: #3880f5;
+  background-image: -moz-linear-gradient(top, #4d90fe, #1969e8);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#4d90fe), to(#1969e8));
+  background-image: -webkit-linear-gradient(top, #4d90fe, #1969e8);
+  background-image: -o-linear-gradient(top, #4d90fe, #1969e8);
+  background-image: linear-gradient(to bottom, #4d90fe, #1969e8);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff4d90fe', endColorstr='#ff1969e8', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+}
+.ihq-btn-primary:focus {
+  border: 1px solid #3079ed;
+  -webkit-box-shadow: inset 0 0 0 1px #ffffff;
+  -moz-box-shadow: inset 0 0 0 1px #ffffff;
+  box-shadow: inset 0 0 0 1px #ffffff;
+}
+.ihq-btn-primary.disabled,
+.ihq-btn-primary[disabled],
+.ihq-btn-primary.disabled:hover,
+.ihq-btn-primary[disabled]:hover,
+.ihq-btn-primary.disabled:active,
+.ihq-btn-primary[disabled]:active,
+.ihq-btn-primary.disabled:focus,
+.ihq-btn-primary[disabled]:focus {
+  border: 1px solid #3079ed;
+  background-color: #4b8cf7;
+  background-image: -moz-linear-gradient(top, #4d90fe, #4787ed);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#4d90fe), to(#4787ed));
+  background-image: -webkit-linear-gradient(top, #4d90fe, #4787ed);
+  background-image: -o-linear-gradient(top, #4d90fe, #4787ed);
+  background-image: linear-gradient(to bottom, #4d90fe, #4787ed);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff4d90fe', endColorstr='#ff4787ed', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+  background-color: #4d90fe;
+  background-color: #4d90fe \9;
+}
+
+.ihq-btn-primary.active,
+.ihq-btn-primary:active,
+.ihq-btn-primary:hover,
+.ihq-btn-warning.active,
+.ihq-btn-warning:active,
+.ihq-btn-warning:hover{
+  color: white;
+  text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+}
+.ihq-btn-primary:active,
+.ihq-btn-primary.active,
+.ihq-btn-warning:active,
+.ihq-btn-warning.active{
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.ihq-btn-primary:hover,
+.ihq-btn-warning:hover{
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
 
 .add-question{
   margin:10px 10px; 
@@ -456,4 +579,12 @@ input{
 
 .add-question:hover {
   box-shadow: 0 1px 2px rgb(88,88,88);
+}
+
+.ihq-pointer{
+  background-image: url('marker.png');
+  width:30px;  
+  height:30px;
+  background-repeat: no-repeat; 
+  background-size:30px 30px;
 }

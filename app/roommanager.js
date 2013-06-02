@@ -91,7 +91,7 @@ exports.setSockets = function(s){
         return
       };
 
-      question.status = 1;
+      question.state = 1;
       console.log('server answer', question);
       broadcast('answer', question);
     });
