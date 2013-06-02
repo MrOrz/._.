@@ -96,8 +96,19 @@ input{
 	height: 35px;
 	margin-left: 2px;
 	vertical-align: top;
-	background: rgba(255, 179, 179, 0.5);
+	background: rgba(255, 179, 179, 1);
 	/*display: none;*/
+}
+
+.plus{
+  line-height: 25px;
+  text-align: center;
+  border-radius: 3px;
+  box-shadow: 0px 1px 2px black;
+}
+.plus:hover{
+  cursor: pointer;
+  background: rgba(255, 124, 124, 1);
 }
 
 .clock{
@@ -157,6 +168,10 @@ input{
   width: 150px;
   height: 100%;
   font-size: 14px;
+}
+
+.ihq-tool-box .content:hover{
+  background: white;
 }
 .ihq-tool-box .plus{
   width:25px;
