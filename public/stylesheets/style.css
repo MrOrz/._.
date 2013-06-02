@@ -43,9 +43,10 @@ input{
 }
 
 .question-queue{
-	width:20%;
+	width:100%;
 	height:75%;
-	margin: 20px;
+	margin-top: 20px;
+	margin-bottom: 20px;
 	height: 100%;
 	/*float: right;*/
 }
@@ -58,13 +59,35 @@ input{
 }
 
 .for-student{
-	width:200px;
+	width:100%;
 	height: 100px;
 	background: rgba(211,211,211,0.8);
 }
 
 .one-question{
-	width:100%;
+	width: 300px;
+	padding-bottom: 2px;
+	margin-bottom: 5px;
+}
+.content{
+	border: 1px solid rgba(211,211,211,1);
+	width: 240px;
+	min-height: 50px;
+}
+.content:hover{
+	background: rgba(211,211,211,0.5);
+}
+.plus,.content{
+	display: inline-block;
+}
+
+.plus{
+	width: 30px;
+	height: 30px;
+	margin-left: 2px;
+	vertical-align: top;
+	background: rgba(211,211,211,0.5);
+	/*display: none;*/
 }
 
 .clock{
@@ -89,10 +112,12 @@ input{
 
 .right-section{
 	position: relative;
+	height: 638px;
 }
 
 .over-btn{
 	position: absolute;
+	margin-top: 30px;
 	bottom: 0px;
 	left: 0px;
 }
