@@ -6,7 +6,27 @@
   </head>
   <body>
     <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <div class="row">
+      <!-- <div class="controls">
+        <input class="input-block-level span12" type="text" placeholder=".input-block-level">
+      </div> -->
+      <div class="span10">
+        <form>
+        <fieldset class="section">
+          <legend>1.請輸入HTML Slide網址</legend>
+          <!-- <label>Label name</label> -->
+          <input type="text" placeholder="輸入HTML Slide網址">          
+        </fieldset>
+        <fieldset class="section">
+          <legend>2.複製貼上下面tag到</body>前</legend>
+          <!-- <label>Label name</label> -->
+          <input type="text" placeholder="輸入HTML Slide網址">          
+        </fieldset>
+        </form>
+      </div>
+      <button class="btn btn-success" type="button">Large button</button>
+
+    </div>
     <script type="text/javascript" src="/javascripts/dependencies.js"></script>
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
   </body>

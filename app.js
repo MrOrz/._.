@@ -33,7 +33,7 @@ app.configure(function(){
   app.use(express.static(path.join(__dirname, 'public')));
 });
 
-mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://127.0.0.1/ihavequestiono');
+// mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://127.0.0.1/ihavequestiono');
 
 app.configure('development', function(){
   app.use(express.errorHandler());
