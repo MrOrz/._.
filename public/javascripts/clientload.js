@@ -6,7 +6,7 @@
     '/javascripts/client.js'];
   var rootUrl = 'http://localhost:3000';
   function loadScript() {
-    /*
+
     if (0 == scriptList.length) {
       return;
     }
@@ -16,8 +16,8 @@
     s.src = rootUrl + scriptList[0];
     s.onload = loadScript;
     t.parentNode.insertBefore(s, t);
-    scriptList.pop();
-    */
+    scriptList.shift();
+/*
     var t = document.getElementsByTagName('script')[0];
     for (var i = 0; i < scriptList.length; ++i) {
       var s = document.createElement('script');
@@ -25,6 +25,7 @@
       s.src = rootUrl + scriptList[i];
       t.parentNode.insertBefore(s, t);
     }
+*/
   }
   loadScript();
 })();
