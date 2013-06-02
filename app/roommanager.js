@@ -74,7 +74,9 @@ exports.setSockets = function(s){
     });
     socket.on('client:plus', function(questionId){
       var question = room.questions[questionId];
-      if(!question) return;
+      if(!question){
+        console.error(room.questions)
+      return};
 
       question.count += 1;
       broadcast('plus', {
@@ -84,7 +86,10 @@ exports.setSockets = function(s){
     socket.on('server:answer', function(questionId){
       if(!isLecturer) return; // Ignore non-lecturer requests
       var question = room.questions[questionId];
-      if(!question) return;
+      if(!question){
+        console.error(questionId, room.questions);
+        return
+      };
 
       question.status = 1;
       console.log('server answer', question);
