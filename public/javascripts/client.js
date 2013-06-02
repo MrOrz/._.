@@ -52,11 +52,8 @@ $(function() {
   var askState = 0;
 
   function updatePage(urlHash) {
-    if (window.location.hash == urlHash) {
-      return;
-    }
     // show pointers
-    $('.pointer').empty();
+    $('.pointer').remove();
     for (var i = 0; i < questionCollection.length; ++i) {
       var model = questionCollection.at(i);
       if (model.get('location').pageurl == urlHash) {
