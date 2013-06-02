@@ -19,11 +19,10 @@ exports.create = function(req, res){
   console.log('created room param:', req.params);
 
   // Creating room
-  var room = roommanager.create({id: helper.generateRoomId()});
-  // TODO: set room URLs
+  var room = roommanager.create(helper.generateRoomId(), req.params.url);
 
-  // TODO: set cookies for lecturer.
-
+  // Set cookies for lecturer.
+  helper.setAuthToken(res, room.id);
 
   // Redirect the lecturer to his/her dashboard.
   res.redirect('/dashboard/'+room.id);

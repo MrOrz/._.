@@ -13,7 +13,8 @@ var express = require('express')
 
 var app = express()
   , server = http.createServer(app)
-  , io = socketio.listen(server);
+  , io = socketio.listen(server)
+  , cookieParser = express.cookieParser('oiqwjuoi4eutnvaiojflkajpodiwdhugehqvoint;ortj[0qvt0,p92375ptqmtovkavawfvw');
 
 io.configure(function () {
   io.set("transports", ["xhr-polling"]);
@@ -22,6 +23,13 @@ io.configure(function () {
     console.log('Handshake', handshakeData);
     var roomId = handshakeData.query.id;
 
+    handshakeData.roomId = roomId;
+
+    // Check cookie.
+    cookieParser(handshakeData, {}, function(err){
+      handshakeData.isLecturer = helper.checkAuthToken(handshakeData);
+      callback(null, true);
+    })
   });
 });
 
@@ -37,7 +45,7 @@ app.configure(function(){
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
   app.use(express.methodOverride());
-  app.use(express.cookieParser('oiqwjuoi4eutnvaiojflkajpodiwdhugehqvoint;ortj[0qvt0,p92375ptqmtovkavawfvw'));
+  app.use(cookieParser);
   app.use(express.session());
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
@@ -52,6 +60,7 @@ app.get('/', controllers.index);
 app.post('/room/create', controllers.create);
 app.get('/dashboard/:id', controllers.dashboard);
 
+// TODO: remove them.
 app.get('/questions/:roomId', controllers.getQuestions);
 app.post('/questions/:roomId', controllers.postQuestions);
 app.put('/questions/:roomId', controllers.putQuestions);
