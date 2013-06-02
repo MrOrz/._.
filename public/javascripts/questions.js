@@ -93,8 +93,8 @@ var QuestionView = Backbone.View.extend({
   },
   changeQuestionStateRemote: function(data){
     var model = this.collection.get(data.id);
+    console.log('changeQuestionStateRemote', data, model);
     model.set('state', data.state);
-    console.log('changeQuestionStateRemote', data);
   },
   doneQuestion: function(event) {
     if ('server' != $("body").attr("role")) {
