@@ -15,7 +15,7 @@ $(function() {
 
   // append bar
   var stringBuild = [
-    '<div class="ihq-tool-box">',   
+    '<div class="ihq-tool-box">',
       '<div class="ihq-tool">',
         '<i class="icon-search">',
         '</i>',
@@ -29,6 +29,12 @@ $(function() {
   ].join('');
   $('body').append(stringBuild);
   var questionCollection = new Questions();
+
+  // Populate questions
+  socket.on('init', function(data){
+    questionCollection.reset(data.questions);
+  });
+
   var view = new QuestionView({
     el: $(".ihq-question-queue"),
     collection: questionCollection
