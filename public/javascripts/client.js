@@ -33,8 +33,7 @@ $(function() {
         '<i class="icon-search">',
         '</i>',
         '<button class="add-question ihq-btn ihq-btn-warning" type="button">',
-        'AddQuestion</button>',
-
+        '我有問題！</button>',
       '</div>',
       '<div class="ihq-question-queue">',
       '</div>',
@@ -74,15 +73,16 @@ $(function() {
       updatePage(data.urlHash);
     });
   }
-
+  
   var askQuestionBlock = $([
-    "<div style='postition: absolute; background: rgba(255, 0, 0, 0.3); width: 100px; height: 100px; z-index:100000'>",
-      "<div>",
-        "<button class='repeat-btn'>repeat</button>",
+    "<div class='ihq-popup-window' style='postition: absolute;z-index:100000;'>",
+      "<div class='ihq-repeat'>",
+        "<button class='repeat-btn ihq-btn'>再重說一次</button>",
       "</div>",
       "<div>",
+        '<div class="ihq-enter-question">輸入問題</div>',
         "<input type='text' class='question-text'></input>",
-        "<button class='question-btn'>question</button>",
+        "<button class='question-btn ihq-btn'>送出問題</button>",
       "</div>",
     "</div>"].join(""));
   $("body").append(askQuestionBlock);
@@ -99,7 +99,8 @@ $(function() {
     }
     askState = 2;
     console.log(event);
-    askQuestionBlock.offset({top: event.offsetY, left: event.offsetX});
+    askQuestionBlock.css('top', event.pageY);
+    askQuestionBlock.css('left', event.pageX);
     askQuestionBlock.css("position", "absolute");
     askQuestionBlock.show();
   });
@@ -130,7 +131,7 @@ $(function() {
         'pageurl': window.location.hash,
       },
       // repeat or question
-      'type': 0,
+      'type': 1,
       // for question
       'str': $(".question-text", askQuestionBlock).val(),
       // done, or to be answer
@@ -146,6 +147,7 @@ $(function() {
 
   $('.add-question').click(function(event) {
     askState = 1;
+    askQuestionBlock.hide();
     event.stopPropagation();
   });
 });

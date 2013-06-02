@@ -39,12 +39,12 @@ var QuestionView = Backbone.View.extend({
     socket.on('answer', _.bind(this.changeQuestionStateRemote, this));
   },
   events: {
-    'click .content': 'doneQuestion',
+    'click .delete': 'doneQuestion',
     'click .plus': 'plusOneQuestion',
   },
   addQuestion: function(model) {
     console.log(model);
-    var obj = $('<div class="one-question"><div class="content"></div><div class="plus"></div></div>');
+    var obj = $('<div class="one-question"><div class="content"></div><div class="plus"></div><div class="delete"></div></div>');
     obj.attr("mid", model.cid);
     // console.log(model.get('location'));
     if (1 == model.get('type')) {
