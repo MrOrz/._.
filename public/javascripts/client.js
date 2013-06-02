@@ -104,7 +104,7 @@ $(function() {
     askQuestionBlock.show();
   });
   $(".repeat-btn", askQuestionBlock).click(function(event) {
-    questionCollection.add(new Question({
+    var model = new Question({
       'location': {
         'x': askQuestionBlock.css("left"),
         'y': askQuestionBlock.css("top"),
@@ -116,13 +116,14 @@ $(function() {
       'state': 0,
       // +1
       'count': 1,
-    }));
+    });
+    questionCollection.add(model);
     socket.emit('client:ask', model.toJSON());
     askQuestionBlock.hide();
     askState = 0;
   });
   $(".question-btn", askQuestionBlock).click(function(event) {
-    questionCollection.add(new Question({
+    var model = new Question({
       'location': {
         'x': askQuestionBlock.css("left"),
         'y': askQuestionBlock.css("top"),
@@ -136,7 +137,8 @@ $(function() {
       'state': 0,
       // +1
       'count': 1,
-    }));
+    });
+    questionCollection.add(model);
     socket.emit('client:ask', model.toJSON());
     askQuestionBlock.hide();
     askState = 0;
