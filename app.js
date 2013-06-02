@@ -9,6 +9,7 @@ var express = require('express')
   , http = require('http')
   , path = require('path')
   , socketio = require('socket.io')
+  , helper = require('./app/helper')
   , mongoose = require('mongoose');
 
 var app = express()
@@ -21,13 +22,16 @@ io.configure(function () {
   io.set("polling duration", 10);
   io.set('authorization', function(handshakeData, callback){
     console.log('Handshake', handshakeData);
-    var roomId = handshakeData.query.id;
+    var roomId = handshakeData.query.roomId;
 
-    handshakeData.roomId = roomId;
+    if(!roomId){
+      callback(null, false);
+    }
 
     // Check cookie.
     cookieParser(handshakeData, {}, function(err){
-      handshakeData.isLecturer = helper.checkAuthToken(handshakeData);
+      handshakeData.roomId = roomId;
+      handshakeData.isLecturer = helper.checkAuthToken(handshakeData, roomId);
       callback(null, true);
     })
   });
@@ -56,7 +60,7 @@ app.configure('development', function(){
 });
 
 app.get('/', controllers.index);
-app.post('/room/create', controllers.create);
+app.post('/create', controllers.create);
 app.get('/dashboard/:id', controllers.dashboard);
 
 // TODO: remove them.

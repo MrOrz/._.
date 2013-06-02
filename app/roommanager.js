@@ -13,7 +13,7 @@ var Room = function(options){
 
   var urlObj = url.parse(this.slideUrl, true);
   urlObj.query = urlObj.query || {};
-  urlObj.query.roomid = this.id;
+  urlObj.query.rid = this.id;
 
   this.clientUrl = url.format(urlObj); // The url lecturer gives to students
 
@@ -49,7 +49,7 @@ module.exports = {
       var roomId = socket.handshake.roomId,
           isLecturer = socket.handshake.isLecturer;
 
-      console.info('User to ', roomId, ', isLecturer=', isLecturer);
+      console.info('User joining slide', roomId, ', isLecturer=', isLecturer);
 
       // Event handling
       socket.on('client:draw', function(data){
