@@ -4,6 +4,10 @@
  */
 
 exports.index = function(req, res){
-  console.log('req', req);
   res.render('index', { title: 'Express' });
 };
+
+exports.dashboard = function(req, res){
+  console.log('slide id:', req.params.id);
+  res.render('dashboard', {});
+}
