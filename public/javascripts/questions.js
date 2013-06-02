@@ -39,7 +39,6 @@ var QuestionView = Backbone.View.extend({
     'click .plus': 'plusOneQuestion',
   },
   addQuestion: function(model) {
-    // TODO: socket.io.emit
     console.log(model);
     var obj = $('<div class="one-question"><div class="content"></div><div class="plus"></div></div>');
     obj.attr("mid", model.cid);
@@ -54,25 +53,30 @@ var QuestionView = Backbone.View.extend({
     $(this.el).append(obj);
   },
   changeQuestionState: function(model) {
-    // TODO: socket.io.emit
     console.log('changeQuestionState', model);
+    var mid = model.cid
+    $("[mid="+mid+"]").remove();
   },
   changeQuestionCount: function(model) {
-    // TODO: socket.io.emit
-    console.log('changeQuestionCount', model);
+    // TODO: show the count number!
+    console.log('client:change', model);
   },
   doneQuestion: function(event) {
-    var id = $(event.target).parent().attr('mid'); 
-    $(event.target).parent().remove();
+    var id = $(event.target).parent().attr('mid');
     var model = this.collection.get(id);
     var state = model.get('state');
     model.set('state', 1);
+
+    // TODO: socket.io.emit
+    socket.emit('client:ask', model.toJSON());
   },
   plusOneQuestion: function(event) {
     var id = $(event.target).parent().attr('mid');
     var model = this.collection.get(id);
     var count = model.get('count');
     model.set('count', count + 1);
+
+    // TODO: socket.io.emit
   }
 
 });

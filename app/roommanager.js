@@ -21,66 +21,68 @@ var Room = function(options){
   this.projectorUrl = url.format(urlObj); // The url used in projector.
 }
 
-module.exports = {
-  create: function(roomId, url){
-    rooms[roomId] = new Room({
-      roomId: roomId,
-      url: url
+exports.create = function(roomId, url){
+  rooms[roomId] = new Room({
+    roomId: roomId,
+    url: url
+  });
+  return rooms[roomId];
+},
+
+exports.get = function(roomId){
+  // get room by roomId
+  return rooms[roomId];
+}
+
+exports.close = function(roomId){
+  delete rooms[roomId];
+},
+
+exports.setSockets = function(s){
+
+  // Set socket
+  sockets = s;
+
+  // Join users to a room
+  sockets.on('connection', function(socket){
+    var roomId = socket.handshake.roomId,
+        room = rooms[roomId],
+        isLecturer = socket.handshake.isLecturer;
+
+    console.info('User joining slide', roomId, ', isLecturer=', isLecturer);
+    socket.join(roomId);
+
+    // broadcast helper of current room.
+    var broadcast = function(event, data){
+      return sockets.in(roomId).emit(event, data);
+    };
+
+    // Event handling
+    socket.on('client:draw', function(data){
+      console.log('client draw', data);
     });
-    return rooms[roomId];
-  },
-
-  close: function(roomId){
-    delete rooms[roomId];
-  },
-
-  setSockets: function(s){
-
-    // Set socket
-    sockets = s;
-
-    // Join users to a room
-    sockets.on('connection', function(socket){
-      var roomId = socket.handshake.roomId,
-          room = rooms[roomId],
-          isLecturer = socket.handshake.isLecturer;
-
-      console.info('User joining slide', roomId, ', isLecturer=', isLecturer);
-      socket.join(roomId);
-
-      // broadcast helper of current room.
-      var broadcast = function(event, data){
-        return sockets.in(roomId).emit(event, data);
-      };
-
-      // Event handling
-      socket.on('client:draw', function(data){
-        console.log('client draw', data);
-      });
-      socket.on('client:ask', function(data){
-        console.log('client ask', data);
-        room.questions.push(data);
-        broadcast('ask', data);
-      });
-      socket.on('server:answer', function(data){
-        if(!isLecturer) return; // Ignore non-lecturer requests
-
-        console.log('server answer', data);
-        broadcast('answer', data);
-      });
-      socket.on('server:over', function(data){
-        if(!isLecturer) return; // Ignore non-lecturer requests
-
-        console.log('server over', data);
-        //module.exports.close();
-        broadcast('over', data);
-      });
-      socket.on('server:pagechange', function(data){
-        if(!isLecturer) return; // Ignore non-lecturer requests
-
-        broadcast('pagechange', data);
-      });
+    socket.on('client:ask', function(data){
+      console.log('client ask', data);
+      room.questions.push(data);
+      broadcast('ask', data);
     });
+    socket.on('server:answer', function(data){
+      if(!isLecturer) return; // Ignore non-lecturer requests
 
-  }
+      console.log('server answer', data);
+      broadcast('answer', data);
+    });
+    socket.on('server:over', function(data){
+      if(!isLecturer) return; // Ignore non-lecturer requests
+
+      console.log('server over', data);
+      //roommanager.close();
+      broadcast('over', data);
+    });
+    socket.on('server:pagechange', function(data){
+      if(!isLecturer) return; // Ignore non-lecturer requests
+
+      broadcast('pagechange', data);
+    });
+  });
 };
