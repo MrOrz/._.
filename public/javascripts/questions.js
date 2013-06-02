@@ -29,9 +29,9 @@ var Questions = Backbone.Collection.extend({
 
 var QuestionView = Backbone.View.extend({
   initialize: function() {
-    this.collection.bind('add', this.addQuestion);
-    this.collection.bind('change:state', this.changeQuestionState);
-    this.collection.bind('change:count', this.changeQuestionCount);
+    this.collection.bind('add', this.addQuestion, this);
+    this.collection.bind('change:state', this.changeQuestionState, this);
+    this.collection.bind('change:count', this.changeQuestionCount, this);
     // this.$el.append("<ul class='question-list'></ul>");
   },
   events: {
@@ -50,7 +50,8 @@ var QuestionView = Backbone.View.extend({
       $(".content", obj).html("repeat please!!");
     }
     // obj.append($("<button class='done-btn'>done</button><button class='plus-btn'>+1</button>"));
-    this.$el.append(obj);
+    console.log('model', this.el);
+    $(this.el).append(obj);
   },
   changeQuestionState: function(model) {
     // TODO: socket.io.emit
@@ -61,9 +62,12 @@ var QuestionView = Backbone.View.extend({
     console.log('changeQuestionCount', model);
   },
   doneQuestion: function(event) {
-    var id = $(event.target).parent().attr('mid');
-    $(event.target)
-    console.log(id);
+
+    var id = $(event.target).parent().attr('mid'); 
+    console.log('doneQuestion!');
+    console.log($(event.target).parent());
+    console.log($(event.target).parent());
+    $(event.target).parent().empty();
     var model = this.collection.get(id);
     var state = model.get('state');
     model.set('state', 1);
@@ -73,7 +77,7 @@ var QuestionView = Backbone.View.extend({
     var model = this.collection.get(id);
     var count = model.get('count');
     model.set('count', count + 1);
-  },
+  }
 });
 /*
   var questionCollection = new Questions();
