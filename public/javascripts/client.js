@@ -63,6 +63,9 @@ $(function() {
       }
     }
     askState = 0;
+    if (window.location.hash == urlHash) {
+      return;
+    }
     window.location.hash = urlHash;
     if (sync) {
       window.socket.emit("server:pagechange", {
