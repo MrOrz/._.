@@ -2,6 +2,9 @@ var Socket = undefined;
 
 var Question = Backbone.Model.extend({
   initialize: function() {
+    if(!this.get('id')){
+      this.set('id', "" + Math.random());
+    }
   },
   defaults: {
     // slide location
