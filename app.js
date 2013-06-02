@@ -65,6 +65,7 @@ app.get('/', controllers.index);
 app.post('/create', controllers.create);
 app.get('/dashboard/:id', controllers.dashboard);
 app.get('/c.js', cors(), controllers.serveClient)
+app.get('/testpage', controllers.testpage);
 
 server.listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));

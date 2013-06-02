@@ -43,6 +43,7 @@ var QuestionView = Backbone.View.extend({
     socket.on('plus', _.bind(this.changeQuestionCountRemote, this));
   },
   events: {
+    'click .content': 'gotoQuestion',
     'click .delete': 'doneQuestion',
     'click .plus': 'plusOneQuestion',
   },
@@ -61,6 +62,11 @@ var QuestionView = Backbone.View.extend({
     // obj.append($("<button class='done-btn'>done</button><button class='plus-btn'>+1</button>"));
     console.log('model', this.el);
     $(this.el).append(obj);
+    if ('server' == $("body").attr("role")) {
+      $(".plus", obj).hide();
+    } else {
+      $(".delete", obj).hide();
+    }
   },
   addAllQuestions: function() {
     var that = this;
@@ -110,7 +116,16 @@ var QuestionView = Backbone.View.extend({
 
     // TODO: socket.io.emit
     socket.emit('client:plus', model.id);
-  }
+  },
+  gotoQuestion: function(event) {
+    var id = $(event.target).parent().attr('mid');
+    var model = this.collection.get(id);
+    if ('server' == $("body").attr("role")) {
+      // TODO: change iframe url
+    } else {
+      window.location.hash = model.get('location').pageurl;
+    }
+  },
 });
 /*
   var questionCollection = new Questions();
