@@ -1,10 +1,10 @@
 $(function() {
-  console.log(Questions);
-  var rid = /rid=([^&]+)/.exec(window.location.search)[1];
+  var rid = /rid=([^&]+)/.exec(window.location.search);
   if (!rid) {
     console.log("no rid");
     return;
   }
+  rid = rid[1];
   var stringBuild = [
     '<div class="ihq-tool-box">',
       '<div class="ihg-tool">',
@@ -24,13 +24,20 @@ $(function() {
     collection: questionCollection
   });
 
+  var canvasMap = {}
+
   var Router = Backbone.Router.extend({
     routes: {
-      ":foo": "func1",
+      ":foo": "page",
+      ":foo/:bar" : "subpage",
     },
-    func1: function(p1) {
-        console.log('func1: '+p1);
+    page: function(p1) {
+      console.log('page: '+p1);
+    },
+    subpage: function(p1, p2) {
+      console.log('subpage: '+p1 + ',' + p2);
     },
   });
-
+  var router = new Router();
+  Backbone.history.start();
 });
