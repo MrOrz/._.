@@ -72,10 +72,21 @@ exports.setSockets = function(s){
       room.questions[question.id] = question;
       broadcast('ask', question);
     });
-    socket.on('server:answer', function(question){
-      if(!isLecturer) return; // Ignore non-lecturer requests
+    socket.on('client:plus', function(questionId){
+      var question = room.questions[questionId];
+      if(!question) return;
 
-      room.questions[question.id] = question;
+      question.count += 1;
+      broadcast('plus', {
+        id: questionId, count: question.count
+      });
+    })
+    socket.on('server:answer', function(questionId){
+      if(!isLecturer) return; // Ignore non-lecturer requests
+      var question = room.questions[questionId];
+      if(!question) return;
+
+      question.status = 1;
       console.log('server answer', question);
       broadcast('answer', question);
     });
