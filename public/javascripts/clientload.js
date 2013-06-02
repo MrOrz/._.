@@ -4,9 +4,11 @@
     '/socket.io/socket.io.js',
     '/javascripts/questions.js',
     '/javascripts/client.js'];
+  var styleList = [
+    '/stylesheets/style.css'
+  ];
   var rootUrl = 'http://localhost:3000';
   function loadScript() {
-
     if (0 == scriptList.length) {
       return;
     }
@@ -17,15 +19,20 @@
     s.onload = loadScript;
     t.parentNode.insertBefore(s, t);
     scriptList.shift();
-/*
-    var t = document.getElementsByTagName('script')[0];
-    for (var i = 0; i < scriptList.length; ++i) {
-      var s = document.createElement('script');
-      s.type = 'text/javascript';
-      s.src = rootUrl + scriptList[i];
-      t.parentNode.insertBefore(s, t);
-    }
-*/
   }
+  function loadStyle() {
+    if (0 == styleList.length) {
+      return;
+    }
+    var s = document.createElement('link');
+    var t = document.getElementsByTagName('link')[0];
+    s.rel = "stylesheet";
+    s.href = rootUrl + styleList[0];
+    s.onload = loadStyle;
+    t.parentNode.insertBefore(s, t);
+    styleList.shift();
+  }
+
   loadScript();
+  loadStyle();
 })();

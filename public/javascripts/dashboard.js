@@ -2,7 +2,7 @@
 var questionCollection = new Questions();
 
 var view = new QuestionView({
-  el: $(".question-queue"),
+  el: $(".ihq-question-queue"),
   collection: questionCollection
 });
 

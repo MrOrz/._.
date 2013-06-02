@@ -124,3 +124,14 @@ input{
 	bottom: 0px;
 	left: 0px;
 }
+
+/* Client */
+
+.ihq-tool-box{
+	background-color: rgba(0,0,0,0.7);
+	position: fixed;
+	right:0px;
+	height:100%;
+	width:150px;
+	top:0px;
+}
