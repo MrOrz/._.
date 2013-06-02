@@ -5,7 +5,7 @@ var helper = require('./helper')
 // Homepage.
 exports.index = function(req, res){
   var embedUrl = req.protocol + "://" + req.get('host') + req.url +
-      'javascripts/client.js';
+      'c.js';
   res.render('index', { embedUrl: embedUrl});
 };
 
@@ -35,4 +35,8 @@ exports.create = function(req, res){
 
   // Redirect the lecturer to his/her dashboard.
   res.redirect('/dashboard/'+room.id);
+}
+
+exports.serveClient = function(req, res){
+  res.sendfile("public/javascripts/clientload.js");
 }

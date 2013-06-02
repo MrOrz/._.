@@ -10,7 +10,8 @@
     "ejs": "*",
     "async": "*",
     "socket.io": "*",
-    "mongoose": "*"
+    "mongoose": "*",
+    "cors": "*"
   },
   "engines": {
     "node": "0.10.x",

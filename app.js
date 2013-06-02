@@ -10,7 +10,8 @@ var express = require('express')
   , path = require('path')
   , socketio = require('socket.io')
   , helper = require('./app/helper')
-  , mongoose = require('mongoose');
+  , mongoose = require('mongoose')
+  , cors = require('cors');
 
 var app = express()
   , server = http.createServer(app)
@@ -62,6 +63,7 @@ app.configure('development', function(){
 app.get('/', controllers.index);
 app.post('/create', controllers.create);
 app.get('/dashboard/:id', controllers.dashboard);
+app.get('/c.js', cors(), controllers.serveClient)
 
 server.listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
