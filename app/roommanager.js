@@ -50,6 +50,12 @@ module.exports = {
           isLecturer = socket.handshake.isLecturer;
 
       console.info('User joining slide', roomId, ', isLecturer=', isLecturer);
+      socket.join(roomId);
+
+      // broadcast helper of current room.
+      var broadcast = function(event, data){
+        return sockets.in(roomId).emit(event, data);
+      };
 
       // Event handling
       socket.on('client:draw', function(data){
