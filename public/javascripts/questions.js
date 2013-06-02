@@ -73,7 +73,6 @@ var QuestionView = Backbone.View.extend({
     var model = this.collection.get(id);
     var count = model.get('count');
     model.set('count', count + 1);
-
   }
 
 });
