@@ -5,7 +5,7 @@
 
 var express = require('express')
   , controllers = require('./app/controllers')
-  , storage = require('./app/storage')
+  , roommanager = require('./app/roommanager')
   , http = require('http')
   , path = require('path')
   , socketio = require('socket.io')
@@ -18,7 +18,16 @@ var app = express()
 io.configure(function () {
   io.set("transports", ["xhr-polling"]);
   io.set("polling duration", 10);
+  io.set('authorization', function(handshakeData, callback){
+    console.log('Handshake', handshakeData);
+    var roomId = handshakeData.query.id;
+
+  });
 });
+
+// Pass socket to roommanager,
+// delegating the socket events to roommanager.
+roommanager.setSockets(io.sockets);
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
@@ -40,7 +49,12 @@ app.configure('development', function(){
 });
 
 app.get('/', controllers.index);
+app.post('/room/create', controllers.create);
 app.get('/dashboard/:id', controllers.dashboard);
+
+app.get('/questions/:roomId', controllers.getQuestions);
+app.post('/questions/:roomId', controllers.postQuestions);
+app.put('/questions/:roomId', controllers.putQuestions);
 
 server.listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
