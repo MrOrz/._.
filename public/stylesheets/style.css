@@ -62,8 +62,17 @@ input{
 
 .for-student{
 	width:100%;
-	height: 100px;
-	background: rgba(211,211,211,0.8);
+	/*height: 100px;*/
+}
+.for-student span{
+  font-size: 17px;
+}
+.student-url{
+  margin-top: 5px;
+	background: rgba(226, 246, 255, 0.8);
+  width:260px;
+  padding: 10px;
+  /*height: 100px;*/
 }
 
 .one-question{
@@ -78,7 +87,7 @@ input{
   background: rgb(255,255,255);
 }
 .content:hover{
-	background: rgba(211,211,211,0.5);
+	background: rgba(226, 246, 255, 0.8);
 }
 .plus,.content{
 	display: inline-block;
@@ -89,7 +98,7 @@ input{
 	height: 35px;
 	margin-left: 2px;
 	vertical-align: top;
-	background: rgba(211,211,211,0.5);
+	background: rgba(255, 179, 179, 0.5);
 	/*display: none;*/
 }
 
@@ -99,9 +108,10 @@ input{
 .clock, .project-window{
 	display: inline-block;
 }
-.project-btn{
+.project-btn, .over-btn{
 	float: right;
 	right: 10px;
+  margin-left: 5px; 
 }
 .left-section, .right-section{
 	display: inline-block;
@@ -124,6 +134,12 @@ input{
 	margin-top: 30px;
 	bottom: 0px;
 	left: 0px;
+}
+
+.main{
+  width:1207px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Client */
