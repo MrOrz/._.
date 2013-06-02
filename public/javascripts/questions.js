@@ -78,6 +78,8 @@ var QuestionView = Backbone.View.extend({
     console.log('client:change', model);
   },
   changeQuestionStateRemote: function(data){
+    var model = this.collection.get(data.id);
+    model.set('state', data.state);
     console.log('changeQuestionStateRemote', data);
   },
   doneQuestion: function(event) {
@@ -90,7 +92,7 @@ var QuestionView = Backbone.View.extend({
     model.set('state', 1);
 
     // TODO: socket.io.emit
-    socket.emit('client:ask', model.toJSON());
+    socket.emit('server:answer', model.toJSON());
   },
   plusOneQuestion: function(event) {
     var id = $(event.target).parent().attr('mid');

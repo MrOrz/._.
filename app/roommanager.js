@@ -8,8 +8,8 @@ var url = require('url')
 var Room = function(options){
   this.id = options.roomId; // The room id (key)
   this.slideUrl = options.url;  // The url the lecturer entered.
-  this.drawings = [];
-  this.questions = [];
+  this.drawings = {};
+  this.questions = {};
 
   var urlObj = url.parse(this.slideUrl, true);
   urlObj.query = urlObj.query || {};
@@ -66,17 +66,18 @@ exports.setSockets = function(s){
     socket.on('client:draw', function(data){
       console.log('client draw', data);
     });
-    socket.on('client:ask', function(data){
-      console.log('client ask', data);
+    socket.on('client:ask', function(question){
+      console.log('client ask', question);
 
-      room.questions.push(data);
-      broadcast('ask', data);
+      room.questions[question.id] = question;
+      broadcast('ask', question);
     });
-    socket.on('server:answer', function(data){
+    socket.on('server:answer', function(question){
       if(!isLecturer) return; // Ignore non-lecturer requests
 
-      console.log('server answer', data);
-      broadcast('answer', data);
+      room.questions[question.id] = question;
+      console.log('server answer', question);
+      broadcast('answer', question);
     });
     socket.on('server:over', function(data){
       if(!isLecturer) return; // Ignore non-lecturer requests
