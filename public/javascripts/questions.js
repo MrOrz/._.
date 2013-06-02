@@ -74,7 +74,6 @@ var QuestionView = Backbone.View.extend({
     console.log('changeQuestionState', model);
     var mid = model.cid
     $("[mid="+mid+"]").remove();
-    this.deletePointer(model);
   },
   changeQuestionCount: function(model) {
     // TODO: show the count number!
@@ -109,11 +108,8 @@ var QuestionView = Backbone.View.extend({
     if ('server' == $("body").attr("role")) {
       // TODO: change iframe url
     } else {
-      window.location.hash = model.get(location).pageurl;
-    },
-    deletePointer: function(model) {
-      $('[mid='+model.cid+']', 'body .pointer-collection').remove();
-    },
+      window.location.hash = model.get('location').pageurl;
+    }
   },
 });
 /*

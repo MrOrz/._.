@@ -17,8 +17,6 @@ $(function() {
       '</div>',
       '<div class="ihq-question-queue">',
       '</div>',
-    '</div>',
-    '<div class="pointer-collection" style="position: absolute;">',
     '</div>'
   ].join('');
   $('body').append(stringBuild);
@@ -39,7 +37,7 @@ $(function() {
     obj.css("left", model.get("location").x);
     obj.css("top", model.get("location").y);
     obj.attr("mid", model.cid);
-    $('body .pointer-collection').append(obj);
+    $('body').append(obj);
   }
 
   // 0: normal
@@ -53,7 +51,7 @@ $(function() {
       return;
     }
     // show pointers
-    $('body .pointer-collection').empty();
+    $('.pointer').empty();
     for (var i = 0; i < questionCollection.length; ++i) {
       var model = questionCollection.at(i);
       if (model.get('location').pageurl == urlHash) {
@@ -120,7 +118,6 @@ $(function() {
     askQuestionBlock.css('left', event.pageX);
     askQuestionBlock.css("position", "absolute");
     askQuestionBlock.show();
-    addPointer(model);
   });
   $(".repeat-btn", askQuestionBlock).click(function(event) {
     var model = new Question({
@@ -140,6 +137,7 @@ $(function() {
     socket.emit('client:ask', model.toJSON());
     askQuestionBlock.hide();
     askState = 0;
+    addPointer(model);
   });
   $(".question-btn", askQuestionBlock).click(function(event) {
     var model = new Question({
