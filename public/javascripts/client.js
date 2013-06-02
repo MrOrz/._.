@@ -99,7 +99,7 @@ $(function() {
     }
     askState = 2;
     console.log(event);
-    askQuestionBlock.offset({top: event.offsetY, left: event.offsetX});
+    askQuestionBlock.offset({top: event.pageY, left: event.pageX});
     askQuestionBlock.css("position", "absolute");
     askQuestionBlock.show();
   });
@@ -130,7 +130,7 @@ $(function() {
         'pageurl': window.location.hash,
       },
       // repeat or question
-      'type': 0,
+      'type': 1,
       // for question
       'str': $(".question-text", askQuestionBlock).val(),
       // done, or to be answer
@@ -146,6 +146,7 @@ $(function() {
 
   $('.add-question').click(function(event) {
     askState = 1;
+    askQuestionBlock.hide();
     event.stopPropagation();
   });
 });
