@@ -69,7 +69,7 @@ $(function() {
 
   $('.add-question').click(function() {
       console.log('add question click(function()!');
-      questionCollection.add(new Question({
+      var model = new Question({
         'location': {
           'x': 1,
           'y': 1,
@@ -83,7 +83,9 @@ $(function() {
         'state': 0,
         // +1
         'count': 1,
-      }));
+      });
+      questionCollection.add(model);
+      socket.emit('client:ask', model.toJSON());
     });
 });
 
