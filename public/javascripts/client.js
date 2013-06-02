@@ -1,7 +1,7 @@
 $(function() {
   console.log(Questions);
   var stringBuild = [
-  	'<div class="ihq-tool-box">',
+  	'<div class="ihq-tool-box">',  	
   		'<div class="ihg-tool">',
   			'<i class="icon-search">',
   			'</i>',
