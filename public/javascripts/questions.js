@@ -62,13 +62,8 @@ var QuestionView = Backbone.View.extend({
     console.log('changeQuestionCount', model);
   },
   doneQuestion: function(event) {
-
     var id = $(event.target).parent().attr('mid'); 
-    console.log('doneQuestion!');
-    console.log($(event.target).parent());
-    console.log($(event.target).parent());
-    $(event.target).parent().empty();
-
+    $(event.target).parent().remove();
     var model = this.collection.get(id);
     var state = model.get('state');
     model.set('state', 1);

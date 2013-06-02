@@ -82,8 +82,8 @@ input{
 }
 
 .plus{
-	width: 30px;
-	height: 30px;
+	width: 35px;
+	height: 35px;
 	margin-left: 2px;
 	vertical-align: top;
 	background: rgba(211,211,211,0.5);
@@ -113,6 +113,7 @@ input{
 .right-section{
 	position: relative;
 	height: 638px;
+	width: 280px;
 }
 
 .over-btn{
