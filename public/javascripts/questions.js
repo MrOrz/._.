@@ -33,6 +33,9 @@ var QuestionView = Backbone.View.extend({
     this.collection.bind('change:state', this.changeQuestionState, this);
     this.collection.bind('change:count', this.changeQuestionCount, this);
     // this.$el.append("<ul class='question-list'></ul>");
+
+    socket.on('ask', _.bind(this.addQuestionRemote, this));
+    socket.on('answer', _.bind(this.changeQuestionStateRemote, this));
   },
   events: {
     'click .content': 'doneQuestion',
@@ -52,6 +55,9 @@ var QuestionView = Backbone.View.extend({
     console.log('model', this.el);
     $(this.el).append(obj);
   },
+  addQuestionRemote: function(data){
+    this.collection.add(new Question(data));
+  },
   changeQuestionState: function(model) {
     console.log('changeQuestionState', model);
     var mid = model.cid
@@ -60,6 +66,9 @@ var QuestionView = Backbone.View.extend({
   changeQuestionCount: function(model) {
     // TODO: show the count number!
     console.log('client:change', model);
+  },
+  changeQuestionStateRemote: function(data){
+    console.log('changeQuestionStateRemote', data);
   },
   doneQuestion: function(event) {
     var id = $(event.target).parent().attr('mid');
