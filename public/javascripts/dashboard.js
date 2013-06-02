@@ -22,6 +22,7 @@ questionCollection.add(new Question({
       'count': 1,
     }));
 
+
 $('.add-question').click(function() {
     var model = new Question({
       'location': {
@@ -43,3 +44,4 @@ $('.add-question').click(function() {
     // TODO: socket.io.emit
     socket.emit('client:ask', model.toJSON());
   });
+
