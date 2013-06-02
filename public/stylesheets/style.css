@@ -90,11 +90,11 @@ input{
 .content:hover{
 	background: rgba(226, 246, 255, 0.8);
 }
-.plus,.content{
+.plus, .delete,.content{
 	display: inline-block;
 }
 
-.plus{
+.plus, .delete{
 	width: 35px;
 	height: 35px;
 	margin-left: 2px;
