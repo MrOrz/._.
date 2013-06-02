@@ -39,6 +39,7 @@ var QuestionView = Backbone.View.extend({
     socket.on('answer', _.bind(this.changeQuestionStateRemote, this));
   },
   events: {
+    'click .content': 'gotoQuestion',
     'click .delete': 'doneQuestion',
     'click .plus': 'plusOneQuestion',
   },
@@ -52,9 +53,13 @@ var QuestionView = Backbone.View.extend({
     } else {
       $(".content", obj).html("repeat please!!");
     }
-    // obj.append($("<button class='done-btn'>done</button><button class='plus-btn'>+1</button>"));
     console.log('model', this.el);
     $(this.el).append(obj);
+    if ('server' == $("body").attr("role")) {
+      $(".plus", obj).hide();
+    } else {
+      $(".delete", obj).hide();
+    }
   },
   addAllQuestions: function() {
     var that = this;
@@ -69,6 +74,7 @@ var QuestionView = Backbone.View.extend({
     console.log('changeQuestionState', model);
     var mid = model.cid
     $("[mid="+mid+"]").remove();
+    this.deletePointer(model);
   },
   changeQuestionCount: function(model) {
     // TODO: show the count number!
@@ -96,8 +102,19 @@ var QuestionView = Backbone.View.extend({
     model.set('count', count + 1);
 
     // TODO: socket.io.emit
-  }
-
+  },
+  gotoQuestion: function(event) {
+    var id = $(event.target).parent().attr('mid');
+    var model = this.collection.get(id);
+    if ('server' == $("body").attr("role")) {
+      // TODO: change iframe url
+    } else {
+      window.location.hash = model.get(location).pageurl;
+    },
+    deletePointer: function(model) {
+      $('[mid='+model.cid+']', 'body .pointer-collection').remove();
+    },
+  },
 });
 /*
   var questionCollection = new Questions();

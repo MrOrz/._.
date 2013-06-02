@@ -1,24 +1,4 @@
 $(function() {
-
-  // 0: normal
-  // 1: select location
-  // 2: select mode
-  // reset when page change
-  var askState = 0;
-
-  function updatePage(urlHash) {
-    if (window.location.hash == urlHash) {
-      return;
-    }
-    askState = 0;
-    window.location.hash = urlHash;
-    if (sync) {
-      window.socket.emit("server:pagechange", {
-        'urlHash': urlHash
-      });
-    }
-  }
-
   // init
   var sync = /sync=([^&]+)/.exec(window.location.search);
   if (sync && '1' == sync[1]) {
@@ -37,11 +17,13 @@ $(function() {
       '</div>',
       '<div class="ihq-question-queue">',
       '</div>',
+    '</div>',
+    '<div class="pointer-collection" style="position: absolute;">',
     '</div>'
   ].join('');
   $('body').append(stringBuild);
-  var questionCollection = new Questions();
 
+  var questionCollection = new Questions();
   // Populate questions
   socket.on('init', function(data){
     questionCollection.reset(data.questions);
@@ -51,6 +33,41 @@ $(function() {
     el: $(".ihq-question-queue"),
     collection: questionCollection
   });
+
+  function addPointer(model) {
+    var obj = $("<div class='pointer' style='position: absolute;'></div>");
+    obj.css("left", model.get("location").x);
+    obj.css("top", model.get("location").y);
+    obj.attr("mid", model.cid);
+    $('body .pointer-collection').append(obj);
+  }
+
+  // 0: normal
+  // 1: select location
+  // 2: select mode
+  // reset when page change
+  var askState = 0;
+
+  function updatePage(urlHash) {
+    if (window.location.hash == urlHash) {
+      return;
+    }
+    // show pointers
+    $('body .pointer-collection').empty();
+    for (var i = 0; i < questionCollection.length; ++i) {
+      var model = questionCollection.at(i);
+      if (model.get('location').pageurl == urlHash) {
+        addPointer(model);
+      }
+    }
+    askState = 0;
+    window.location.hash = urlHash;
+    if (sync) {
+      window.socket.emit("server:pagechange", {
+        'urlHash': urlHash
+      });
+    }
+  }
 
   var Router = Backbone.Router.extend({
     routes: {
@@ -73,9 +90,9 @@ $(function() {
       updatePage(data.urlHash);
     });
   }
-  
+
   var askQuestionBlock = $([
-    "<div class='ihq-popup-window' style='postition: absolute;z-index:100000;'>",
+    "<div class='ihq-popup-window' style='position: absolute;z-index:100000;'>",
       "<div class='ihq-repeat'>",
         "<button class='repeat-btn ihq-btn'>再重說一次</button>",
       "</div>",
@@ -103,6 +120,7 @@ $(function() {
     askQuestionBlock.css('left', event.pageX);
     askQuestionBlock.css("position", "absolute");
     askQuestionBlock.show();
+    addPointer(model);
   });
   $(".repeat-btn", askQuestionBlock).click(function(event) {
     var model = new Question({
@@ -143,6 +161,7 @@ $(function() {
     socket.emit('client:ask', model.toJSON());
     askQuestionBlock.hide();
     askState = 0;
+    addPointer(model);
   });
 
   $('.add-question').click(function(event) {
