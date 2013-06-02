@@ -2,6 +2,9 @@ var Socket = undefined;
 
 var Question = Backbone.Model.extend({
   initialize: function() {
+    if(!this.get('id')){
+      this.set('id', "" + Math.random());
+    }
   },
   defaults: {
     // slide location
@@ -37,6 +40,7 @@ var QuestionView = Backbone.View.extend({
 
     socket.on('ask', _.bind(this.addQuestionRemote, this));
     socket.on('answer', _.bind(this.changeQuestionStateRemote, this));
+    socket.on('plus', _.bind(this.changeQuestionCountRemote, this));
   },
   events: {
     'click .content': 'gotoQuestion',
@@ -53,6 +57,9 @@ var QuestionView = Backbone.View.extend({
     } else {
       $(".content", obj).html("請再重複一次");
     }
+
+    obj.find('.plus').text(model.get('count'));
+    // obj.append($("<button class='done-btn'>done</button><button class='plus-btn'>+1</button>"));
     console.log('model', this.el);
     $(this.el).append(obj);
     if ('server' == $("body").attr("role")) {
@@ -77,9 +84,16 @@ var QuestionView = Backbone.View.extend({
   },
   changeQuestionCount: function(model) {
     // TODO: show the count number!
-    console.log('client:change', model);
+    console.log('model id', model.id, 'count changed to ', model.get('count'));
+    $("[mid="+model.cid+"]").find('.plus').text(model.get('count'));
+  },
+  changeQuestionCountRemote: function(data){
+    var model = this.collection.get(data.id);
+    model.set('count', data.count);
   },
   changeQuestionStateRemote: function(data){
+    var model = this.collection.get(data.id);
+    model.set('state', data.state);
     console.log('changeQuestionStateRemote', data);
   },
   doneQuestion: function(event) {
@@ -92,7 +106,7 @@ var QuestionView = Backbone.View.extend({
     model.set('state', 1);
 
     // TODO: socket.io.emit
-    socket.emit('client:ask', model.toJSON());
+    socket.emit('server:answer', model.id);
   },
   plusOneQuestion: function(event) {
     var id = $(event.target).parent().attr('mid');
@@ -101,6 +115,7 @@ var QuestionView = Backbone.View.extend({
     model.set('count', count + 1);
 
     // TODO: socket.io.emit
+    socket.emit('client:plus', model.id);
   },
   gotoQuestion: function(event) {
     var id = $(event.target).parent().attr('mid');
