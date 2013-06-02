@@ -49,7 +49,7 @@ var QuestionView = Backbone.View.extend({
   },
   addQuestion: function(model) {
     console.log(model);
-    var obj = $('<div class="one-question"><div class="content"></div><div class="plus"></div><div class="delete"></div></div>');
+    var obj = $('<div class="one-question"><div class="content"></div><div class="desc"><div class="plus"></div><div class="delete"></div></div></div>');
     obj.attr("mid", model.cid);
     // console.log(model.get('location'));
     if (1 == model.get('type')) {

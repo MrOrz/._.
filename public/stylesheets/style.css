@@ -87,20 +87,24 @@ input{
 .content:hover{
 	background: rgba(226, 246, 255, 0.8);
 }
-.plus, .delete,.content{
+.desc,.content{
 	display: inline-block;
 }
 
-.plus, .delete{
-	margin-left: 2px;
-	vertical-align: top;
-	background: rgba(255, 179, 179, 1);
-	/*display: none;*/
+.plus{
+  background: rgba(255, 179, 179, 1);
+  /*display: none;*/
+}
+
+.delete{
+  background: rgba(240, 150, 79, 1);
 }
 
 .plus .delete{
+	margin-left: 2px;
   height: 15px;
   width: 30px;
+  margin-bottom: 5px;
 }
 .plus{
   line-height: 25px;
