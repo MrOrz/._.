@@ -3,8 +3,9 @@ $(function() {
   var sync = /sync=([^&]+)/.exec(window.location.search);
   if (sync && '1' == sync[1]) {
     sync = true;
+  } else {
+    sync = false;
   }
-  sync = false;
 
   // append bar
   var stringBuild = [
@@ -56,11 +57,15 @@ $(function() {
     $('.ihq-pointer').remove();
     for (var i = 0; i < questionCollection.length; ++i) {
       var model = questionCollection.at(i);
+      console.log(model.get('location'));
       if (model.get('location').pageurl == urlHash) {
         addPointer(model);
       }
     }
     askState = 0;
+    if (window.location.hash == urlHash) {
+      return;
+    }
     window.location.hash = urlHash;
     if (sync) {
       window.socket.emit("server:pagechange", {
@@ -85,7 +90,9 @@ $(function() {
   Backbone.history.start();
 
 
+  console.log(sync);
   if (sync) {
+    console.log("orz change");
     window.socket.on('pagechange', function(data) {
       updatePage(data.urlHash);
     });
