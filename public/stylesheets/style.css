@@ -45,7 +45,7 @@ input{
 .ihq-question-queue{
 	width:302px;
 	height: 404px;
-	margin-top: 20px;
+	/*margin-top: 20px;*/
 	margin-bottom: 20px;
 	/*height: 100%;*/
 	/*float: right;*/
@@ -67,6 +67,7 @@ input{
 .subtitle{
   font-size: 17px;
   margin-bottom: 4px;
+  margin-top: 10px;
 }
 .student-url{
 	background: rgba(226, 246, 255, 0.8);
@@ -157,13 +158,34 @@ input{
 }
 .ihq-tool-box .ihq-question-queue{
   width: 150px;
+  height: 100%;
 }
 .ihq-tool-box .plus{
   width:25px;
   height: 25px;
 }
 
+.ihq-endter-question{
+  font-size: 14px;
+  margin: 4px
+}
 
+.ihq-popup-window{
+  border-radius: 3px;
+  background: rgba(127, 226, 198, 0.9);
+  width: 174px;
+  height: 108px;
+  box-shadow: 1px 2px 5px rgba(0,0,0,0.8);
+  padding: 6px;
+}
+.ihq-popup-window input{
+  width: 130px;
+  margin-left: 10px;
+}
+
+.ihq-popup-window button{
+  font-size: 15px;
+}
 
 
 /* Boostrap custom*/
@@ -173,7 +195,7 @@ input{
   padding: 4px 12px;
   margin: 0;
   color: #333;
-  text-shadow: 0 1px 0 #fff;
+  
   white-space: nowrap;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
@@ -201,7 +223,8 @@ input{
   box-shadow: none;
 }
 .ihq-btn:hover {
-  text-shadow: none;
+  text-shadow: 0 1px 0 #fff;
+  /*text-shadow: none;*/
   border-color: #c6c6c6;
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
   -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
