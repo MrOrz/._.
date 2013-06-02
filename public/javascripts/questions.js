@@ -68,6 +68,7 @@ var QuestionView = Backbone.View.extend({
     console.log($(event.target).parent());
     console.log($(event.target).parent());
     $(event.target).parent().empty();
+
     var model = this.collection.get(id);
     var state = model.get('state');
     model.set('state', 1);
@@ -77,7 +78,9 @@ var QuestionView = Backbone.View.extend({
     var model = this.collection.get(id);
     var count = model.get('count');
     model.set('count', count + 1);
+
   }
+
 });
 /*
   var questionCollection = new Questions();
