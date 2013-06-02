@@ -8,7 +8,7 @@ $(function() {
   			'<div> class="ask"',
   			'</div>',
   		'</div>',
-  		'<div class="ihg-question-queue">',  			
+  		'<div class="ihq-question-queue">',  			
   		'</div>',
   	'</div>'
   ];
