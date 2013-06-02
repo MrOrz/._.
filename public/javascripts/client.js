@@ -99,7 +99,8 @@ $(function() {
     }
     askState = 2;
     console.log(event);
-    askQuestionBlock.offset({top: event.pageY, left: event.pageX});
+    askQuestionBlock.css('top', event.pageY);
+    askQuestionBlock.css('left', event.pageX);
     askQuestionBlock.css("position", "absolute");
     askQuestionBlock.show();
   });
