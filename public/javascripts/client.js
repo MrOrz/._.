@@ -33,7 +33,7 @@ $(function() {
   });
 
   function addPointer(model) {
-    var obj = $("<div class='pointer' style='position: absolute; width: 100px; height: 100px; background: rgba(255, 0, 0, 0.3);'></div>");
+    var obj = $("<div class='ihq-pointer' style='position: absolute;'><i class='icon-map-marker'></i></div>");
     obj.css("left", model.get("location").x);
     obj.css("top", model.get("location").y);
     if (0 == model.get('type')) {
@@ -56,7 +56,7 @@ $(function() {
       return;
     }
     // show pointers
-    $('.pointer').empty();
+    $('.ihq-pointer').remove();
     for (var i = 0; i < questionCollection.length; ++i) {
       var model = questionCollection.at(i);
       if (model.get('location').pageurl == urlHash) {

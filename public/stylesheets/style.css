@@ -552,3 +552,10 @@ input{
   box-shadow: 0 1px 2px rgb(88,88,88);
 }
 
+.ihq-pointer{
+  background-image: url('marker.png');
+  width:30px;  
+  height:30px;
+  background-repeat: no-repeat; 
+  background-size:30px 30px;
+}
