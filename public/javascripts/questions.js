@@ -1,10 +1,7 @@
 $(function() {
+
   var Question = Backbone.Model.extend({
     initialize: function() {
-      this.bind('change:state', function() {
-        console.log(this);
-        // TODO:
-      });
     },
     defaults: {
       // slide location
@@ -26,20 +23,23 @@ $(function() {
 
   var Questions = Backbone.Collection.extend({
     initialize: function(options) {
-      //this.bind('add', options.view.addQuestion);
     },
-    model: Question
+    model: Question,
   });
 
   var QuestionView = Backbone.View.extend({
     initialize: function() {
       this.collection.bind('add', this.addQuestion);
+      this.collection.bind('change:state', this.changeQuestionState);
+      this.collection.bind('change:count', this.changeQuestionCount);
       this.$el.append("<ul class='question-list'></ul>");
     },
     events: {
-      'click .question-list li': "clickModel"
+      'click .done-btn': 'doneQuestion',
+      'click .plus-btn': 'plusOneQuestion',
     },
     addQuestion: function(model) {
+      // TODO: socket.io.emit
       console.log(model);
       var obj = $("<li></li>");
       obj.attr("mid", model.cid);
@@ -49,12 +49,29 @@ $(function() {
       } else {
         obj.html("repeat please!!");
       }
+      obj.append($("<button class='done-btn'>done</button><button class='plus-btn'>+1</button>"));
       $('.question-list', this.$el).append(obj);
     },
-    clickModel: function(event) {
-      var id = $(event.target).attr('mid');
-      console.log(this.collection.get(id));
-    }
+    changeQuestionState: function(model) {
+      // TODO: socket.io.emit
+      console.log('changeQuestionState', model);
+    },
+    changeQuestionCount: function(model) {
+      // TODO: socket.io.emit
+      console.log('changeQuestionCount', model);
+    },
+    doneQuestion: function(event) {
+      var id = $(event.target).parent().attr('mid');
+      var model = this.collection.get(id);
+      var state = model.get('state');
+      model.set('state', 1);
+    },
+    plusOneQuestion: function(event) {
+      var id = $(event.target).parent().attr('mid');
+      var model = this.collection.get(id);
+      var count = model.get('count');
+      model.set('count', count + 1);
+    },
   });
 
   var questionCollection = new Questions();
@@ -63,7 +80,7 @@ $(function() {
     el: $("#questions"),
     collection: questionCollection
   });
-  
+
   $('#test-btn').click(function() {
     questionCollection.add(new Question({
       'location': {
@@ -76,7 +93,7 @@ $(function() {
       // for question
       'str': 123,
       // done, or to be answer
-      'state': 1,
+      'state': 0,
       // +1
       'count': 1,
     }));
