@@ -19,7 +19,6 @@ var Room = function(options){
 
   urlObj.query.sync = 1;
   this.projectorUrl = url.format(urlObj); // The url used in projector.
-
 }
 
 module.exports = {
@@ -35,10 +34,6 @@ module.exports = {
     delete rooms[roomId];
   },
 
-  emit: function(){
-
-  },
-
   setSockets: function(s){
 
     // Set socket
@@ -47,6 +42,7 @@ module.exports = {
     // Join users to a room
     sockets.on('connection', function(socket){
       var roomId = socket.handshake.roomId,
+          room = rooms[roomId],
           isLecturer = socket.handshake.isLecturer;
 
       console.info('User joining slide', roomId, ', isLecturer=', isLecturer);
@@ -63,19 +59,27 @@ module.exports = {
       });
       socket.on('client:ask', function(data){
         console.log('client ask', data);
+        room.questions.push(data);
+        broadcast('ask', data);
       });
       socket.on('server:answer', function(data){
         if(!isLecturer) return; // Ignore non-lecturer requests
-        console.log('client draw', data);
+
+        console.log('server answer', data);
+        broadcast('answer', data);
       });
       socket.on('server:over', function(data){
         if(!isLecturer) return; // Ignore non-lecturer requests
-        console.log('client draw', data);
+
+        console.log('server over', data);
+        //module.exports.close();
+        broadcast('over', data);
       });
       socket.on('server:pagechange', function(data){
         if(!isLecturer) return; // Ignore non-lecturer requests
-      });
 
+        broadcast('pagechange', data);
+      });
     });
 
   }
