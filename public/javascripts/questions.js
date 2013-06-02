@@ -30,6 +30,7 @@ var Questions = Backbone.Collection.extend({
 var QuestionView = Backbone.View.extend({
   initialize: function() {
     this.collection.bind('add', this.addQuestion, this);
+    this.collection.bind('reset', this.addAllQuestions, this);
     this.collection.bind('change:state', this.changeQuestionState, this);
     this.collection.bind('change:count', this.changeQuestionCount, this);
     // this.$el.append("<ul class='question-list'></ul>");
@@ -54,6 +55,12 @@ var QuestionView = Backbone.View.extend({
     // obj.append($("<button class='done-btn'>done</button><button class='plus-btn'>+1</button>"));
     console.log('model', this.el);
     $(this.el).append(obj);
+  },
+  addAllQuestions: function() {
+    var that = this;
+    this.collection.forEach(function(model){
+      that.addQuestion(model);
+    });
   },
   addQuestionRemote: function(data){
     this.collection.add(new Question(data));

@@ -41,6 +41,12 @@ $(function() {
   ].join('');
   $('body').append(stringBuild);
   var questionCollection = new Questions();
+
+  // Populate questions
+  socket.on('init', function(data){
+    questionCollection.reset(data.questions);
+  });
+
   var view = new QuestionView({
     el: $(".ihq-question-queue"),
     collection: questionCollection
@@ -93,12 +99,12 @@ $(function() {
     }
     askState = 2;
     console.log(event);
-    askQuestionBlock.offset({top: event.offsetY, left: event.offsetX});
+    askQuestionBlock.offset({top: event.pageY, left: event.pageX});
     askQuestionBlock.css("position", "absolute");
     askQuestionBlock.show();
   });
   $(".repeat-btn", askQuestionBlock).click(function(event) {
-    questionCollection.add(new Question({
+    var model = new Question({
       'location': {
         'x': askQuestionBlock.css("left"),
         'y': askQuestionBlock.css("top"),
@@ -110,35 +116,37 @@ $(function() {
       'state': 0,
       // +1
       'count': 1,
-    }));
-    // TODO: socket.emit
+    });
+    questionCollection.add(model);
+    socket.emit('client:ask', model.toJSON());
     askQuestionBlock.hide();
     askState = 0;
   });
   $(".question-btn", askQuestionBlock).click(function(event) {
-    questionCollection.add(new Question({
+    var model = new Question({
       'location': {
         'x': askQuestionBlock.css("left"),
         'y': askQuestionBlock.css("top"),
         'pageurl': window.location.hash,
       },
       // repeat or question
-      'type': 0,
+      'type': 1,
       // for question
       'str': $(".question-text", askQuestionBlock).val(),
       // done, or to be answer
       'state': 0,
       // +1
       'count': 1,
-    }));
-    // TODO: socket.emit
+    });
+    questionCollection.add(model);
+    socket.emit('client:ask', model.toJSON());
     askQuestionBlock.hide();
     askState = 0;
   });
 
-
   $('.add-question').click(function(event) {
     askState = 1;
+    askQuestionBlock.hide();
     event.stopPropagation();
   });
 });

@@ -52,6 +52,11 @@ exports.setSockets = function(s){
     console.info('User joining slide', roomId, ', isLecturer=', isLecturer);
     socket.join(roomId);
 
+    // Send init data
+    socket.emit('init', {
+      questions: room.questions
+    });
+
     // broadcast helper of current room.
     var broadcast = function(event, data){
       return sockets.in(roomId).emit(event, data);
@@ -63,6 +68,7 @@ exports.setSockets = function(s){
     });
     socket.on('client:ask', function(data){
       console.log('client ask', data);
+
       room.questions.push(data);
       broadcast('ask', data);
     });
