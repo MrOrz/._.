@@ -87,7 +87,11 @@ input{
 .content:hover{
 	background: rgba(226, 246, 255, 0.8);
 }
-.desc,.content{
+.desc{
+  width:35px;
+  height:35px;
+}
+.desc, .content{
 	display: inline-block;
 }
 
