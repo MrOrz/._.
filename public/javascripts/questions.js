@@ -50,7 +50,7 @@ var QuestionView = Backbone.View.extend({
     if (1 == model.get('type')) {
       $(".content", obj).html(model.get('str'));
     } else {
-      $(".content", obj).html("repeat please!!");
+      $(".content", obj).html("請再重複一次");
     }
     // obj.append($("<button class='done-btn'>done</button><button class='plus-btn'>+1</button>"));
     console.log('model', this.el);
