@@ -39,6 +39,7 @@ var QuestionView = Backbone.View.extend({
     socket.on('answer', _.bind(this.changeQuestionStateRemote, this));
   },
   events: {
+    'click .content': 'gotoQuestion',
     'click .delete': 'doneQuestion',
     'click .plus': 'plusOneQuestion',
   },
@@ -52,9 +53,13 @@ var QuestionView = Backbone.View.extend({
     } else {
       $(".content", obj).html("請再重複一次");
     }
-    // obj.append($("<button class='done-btn'>done</button><button class='plus-btn'>+1</button>"));
     console.log('model', this.el);
     $(this.el).append(obj);
+    if ('server' == $("body").attr("role")) {
+      $(".plus", obj).hide();
+    } else {
+      $(".delete", obj).hide();
+    }
   },
   addAllQuestions: function() {
     var that = this;
@@ -96,8 +101,16 @@ var QuestionView = Backbone.View.extend({
     model.set('count', count + 1);
 
     // TODO: socket.io.emit
-  }
-
+  },
+  gotoQuestion: function(event) {
+    var id = $(event.target).parent().attr('mid');
+    var model = this.collection.get(id);
+    if ('server' == $("body").attr("role")) {
+      // TODO: change iframe url
+    } else {
+      window.location.hash = model.get('location').pageurl;
+    }
+  },
 });
 /*
   var questionCollection = new Questions();
