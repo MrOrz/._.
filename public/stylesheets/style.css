@@ -1,5 +1,5 @@
 body {
-  padding: 50px;
+  padding: 10px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 a {
@@ -40,4 +40,59 @@ legend{
 }
 input{
 	width: 100%;
+}
+
+.question-queue{
+	width:20%;
+	height:75%;
+	margin: 20px;
+	height: 100%;
+	/*float: right;*/
+}
+
+.slide-window{
+	width: 800px;
+	height: 600px;
+	/*border: 1px solid black;*/
+	box-shadow: 0px 1px 3px rgba(0,0,0,0.7);
+}
+
+.for-student{
+	width:200px;
+	height: 100px;
+	background: rgba(211,211,211,0.8);
+}
+
+.one-question{
+	width:100%;
+}
+
+.clock{
+	margin-top: 10px;
+}
+.clock, .project-window{
+	display: inline-block;
+}
+.project-btn{
+	float: right;
+	right: 10px;
+}
+.left-section, .right-section{
+	display: inline-block;
+	vertical-align: top;
+	margin-right: 20px;
+	margin-left: 30px;
+}
+.left-section{
+	width:800px;
+}
+
+.right-section{
+	position: relative;
+}
+
+.over-btn{
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
 }

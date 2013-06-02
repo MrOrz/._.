@@ -2,9 +2,31 @@
 <html>
   <head>
     <title>Dashboard</title>
+    <link rel='stylesheet' href='/stylesheets/todc-bootstrap.css' />
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
+    <div class="left-section">
+      <div class="slide-window"></div>
+      <div>
+        <div class="clock"><iframe src="http://free.timeanddate.com/clock/i3nnv4bw/n241/fn13/fc333/tceee/pc000/pa5" frameborder="0" width="91" height="26"></iframe>
+        </div>
+        <button class="btn btn-info project-btn" type="button">產生投影視窗</button>
+      </div>
+    </div>
+    <div class="right-section">
+      <div class='for-student'>
+        學生URL</br>
+        <code class="student-url">
+        </code>
+      </div>
+      <div class="question-queue scrollable" style="height: 300px; overflow-y: auto">
+        <div clas="one-question">yooooooo i have one question at there, chap 7.</div>
+        <div clas="one-question">yooooooo i have one question at there, chap 7.</div>
+        <div clas="one-question">yooooooo i have one question at there, chap 7.</div>
+      </div>
+      <button class="btn btn-info over-btn" type="button">結束上課</button>
+    </div>
     <script type="text/javascript" src="/javascripts/dependencies.js"></script>
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <script type="text/javascript" src="/javascripts/questions.js"></script>
