@@ -1,12 +1,25 @@
 $(function() {
-  // init
-  var rid = /rid=([^&]+)/.exec(window.location.search);
-  if (!rid) {
-    console.log("no rid");
-    return;
-  }
-  rid = rid[1];
 
+  // 0: normal
+  // 1: select location
+  // 2: select mode
+  // reset when page change
+  var askState = 0;
+
+  function updatePage(urlHash) {
+    if (window.location.hash == urlHash) {
+      return;
+    }
+    askState = 0;
+    window.location.hash = urlHash;
+    if (sync) {
+      window.socket.emit("server:pagechange", {
+        'urlHash': urlHash
+      });
+    }
+  }
+
+  // init
   var sync = /sync=([^&]+)/.exec(window.location.search);
   if (sync && '1' == sync[1]) {
     sync = true;
@@ -55,17 +68,6 @@ $(function() {
   var router = new Router();
   Backbone.history.start();
 
-  function undatePage(urlHash) {
-    if (window.location.hash == urlHash) {
-      return;
-    }
-    window.location.hash = urlHash;
-    if (sync) {
-      window.socket.emit("server:pagechange", {
-        'urlHash': urlHash
-      });
-    }
-  }
 
   if (sync) {
     window.socket.on('pagechange', function(data) {
@@ -73,26 +75,77 @@ $(function() {
     });
   }
 
-  $('.add-question').click(function() {
-      console.log('add question click(function()!');
-      var model = new Question({
-        'location': {
-          'x': 1,
-          'y': 1,
-          'pageurl': '/123',
-        },
-        // repeat or question
-        'type': 1,
-        // for question
-        'str': 'Yoooooooo',
-        // done, or to be answer
-        'state': 0,
-        // +1
-        'count': 1,
-      });
-      questionCollection.add(model);
-      socket.emit('client:ask', model.toJSON());
-    });
+  var askQuestionBlock = $([
+    "<div style='postition: absolute; background: rgba(255, 0, 0, 0.3); width: 100px; height: 100px; z-index:100000'>",
+      "<div>",
+        "<button class='repeat-btn'>repeat</button>",
+      "</div>",
+      "<div>",
+        "<input type='text' class='question-text'></input>",
+        "<button class='question-btn'>question</button>",
+      "</div>",
+    "</div>"].join(""));
+  $("body").append(askQuestionBlock);
+  askQuestionBlock.hide();
+  $("body").mousemove(function(event) {
+    if (1 != askState) {
+      return true;
+    }
+    console.log(event);
+  });
+  $("body").click(function(event) {
+    if (1 != askState) {
+      return true;
+    }
+    askState = 2;
+    console.log(event);
+    askQuestionBlock.offset({top: event.offsetY, left: event.offsetX});
+    askQuestionBlock.css("position", "absolute");
+    askQuestionBlock.show();
+  });
+  $(".repeat-btn", askQuestionBlock).click(function(event) {
+    questionCollection.add(new Question({
+      'location': {
+        'x': askQuestionBlock.css("left"),
+        'y': askQuestionBlock.css("top"),
+        'pageurl': window.location.hash,
+      },
+      // repeat or question
+      'type': 0,
+      // done, or to be answer
+      'state': 0,
+      // +1
+      'count': 1,
+    }));
+    socket.emit('client:ask', model.toJSON());
+    askQuestionBlock.hide();
+    askState = 0;
+  });
+  $(".question-btn", askQuestionBlock).click(function(event) {
+    questionCollection.add(new Question({
+      'location': {
+        'x': askQuestionBlock.css("left"),
+        'y': askQuestionBlock.css("top"),
+        'pageurl': window.location.hash,
+      },
+      // repeat or question
+      'type': 0,
+      // for question
+      'str': $(".question-text", askQuestionBlock).val(),
+      // done, or to be answer
+      'state': 0,
+      // +1
+      'count': 1,
+    }));
+    socket.emit('client:ask', model.toJSON());
+    askQuestionBlock.hide();
+    askState = 0;
+  });
+
+  $('.add-question').click(function(event) {
+    askState = 1;
+    event.stopPropagation();
+  });
 });
 
 
