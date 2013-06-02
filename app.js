@@ -7,7 +7,8 @@ var express = require('express')
   , routes = require('./routes')
   , http = require('http')
   , path = require('path')
-  , socketio = require('socket.io');
+  , socketio = require('socket.io')
+  , mongoose = require('mongoose');
 
 var app = express()
   , server = http.createServer(app)
@@ -31,6 +32,8 @@ app.configure(function(){
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
 });
+
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://127.0.0.1/ihavequestiono');
 
 app.configure('development', function(){
   app.use(express.errorHandler());
