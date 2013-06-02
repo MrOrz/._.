@@ -44,7 +44,7 @@ input{
 
 .ihq-question-queue{
 	width:302px;
-	height:470px;
+	height: 404px;
 	margin-top: 20px;
 	margin-bottom: 20px;
 	/*height: 100%;*/
@@ -64,19 +64,19 @@ input{
 	width:100%;
 	/*height: 100px;*/
 }
-.for-student span{
+.subtitle{
   font-size: 17px;
+  margin-bottom: 4px;
 }
 .student-url{
-  margin-top: 5px;
 	background: rgba(226, 246, 255, 0.8);
   width:260px;
   padding: 10px;
-  /*height: 100px;*/
+  height: 100px;
 }
 
 .one-question{
-	width: 300px;
+	width: 290px;
 	padding-bottom: 2px;
 	margin-bottom: 5px;
 }
