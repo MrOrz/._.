@@ -176,6 +176,10 @@ $(function() {
     askQuestionBlock.hide();
     event.stopPropagation();
   });
+
+  if (sync) {
+    $(".ihq-tool-box").hide();
+  }
 });
 
 
