@@ -5,27 +5,23 @@ var url = require('url')
   , helper = require('./helper');
 
 
-var Room = function(options){
-  this.id = options.roomId; // The room id (key)
-  this.slideUrl = options.url;  // The url the lecturer entered.
-  this.drawings = {};
+var Room = function(roomId){
+  this.id = roomId; // The room id (key)
+  // this.drawings = {};
   this.questions = {};
 
-  var urlObj = url.parse(this.slideUrl, true);
-  urlObj.query = urlObj.query || {};
-  urlObj.query.rid = this.id;
+  // var urlObj = url.parse(this.slideUrl, true);
+  // urlObj.query = urlObj.query || {};
+  // urlObj.query.rid = this.id;
 
-  this.clientUrl = url.format(urlObj); // The url lecturer gives to students
+  // this.clientUrl = url.format(urlObj); // The url lecturer gives to students
 
-  urlObj.query.sync = 1;
-  this.projectorUrl = url.format(urlObj); // The url used in projector.
+  // urlObj.query.sync = 1;
+  // this.projectorUrl = url.format(urlObj); // The url used in projector.
 }
 
-exports.create = function(roomId, url){
-  rooms[roomId] = new Room({
-    roomId: roomId,
-    url: url
-  });
+exports.create = function(roomId){
+  rooms[roomId] = new Room(roomId);
   return rooms[roomId];
 },
 
@@ -45,6 +41,8 @@ exports.setSockets = function(s){
 
   // Join users to a room
   sockets.on('connection', function(socket){
+    // The handshake data is set by socket.io authentication part.
+    //
     var roomId = socket.handshake.roomId,
         room = rooms[roomId],
         isLecturer = socket.handshake.isLecturer;
