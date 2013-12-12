@@ -1,29 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-TW">
   <head>
     <title>我有問題</title>
+    <meta charset="utf-8">
     <link rel='stylesheet' href='/stylesheets/todc-bootstrap.css' />
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <form method="post" action="/create">
-      <div class="row">
-        <h1>我有問題 iHaveQuestion</h1>
-        <div class="section">
-            <legend>1. 請輸入HTML Slide網址</legend>
-            <input type="text" name="url" placeholder="輸入HTML Slide網址">
-        </div>
-        <div class="section">
-          <legend>2. 複製下面 HTML 標記到 <code>&lt;/body&gt;</code> 前</legend>
-          <pre class="script">
+    <div class="row">
+      <h1>我有問題 iHaveQuestion</h1>
+
+      <% if(flash){ %>
+        <p class="alert alert-<%= flash.type %>"><%= flash.text %></p>
+      <% } %>
+
+      <div class="section">
+        <legend>請複製下面 HTML 標記到 <code>&lt;/body&gt;</code> 前：</legend>
+        <pre class="script">
 &lt;script type="text/javascript"
- src="<%= embedUrl %>"&gt;&lt;/script&gt;
-          </pre>
-        </div>
-        <button class="btn btn-info start" type="submit">開始上課</button>
+src="<%= embedUrl %>" id="°▽°ﾉ" data-room-id="<%= roomId %>"&gt;&lt;/script&gt;
+        </pre>
       </div>
-    </form>
-    <script type="text/javascript" src="/javascripts/dependencies.js"></script>
-    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+
+      <div class="alert alert-block alert-info">
+        <h4>Cookie 的使用</h4>
+        <p>我們使用您正瀏覽此頁面之 Cookie 來判斷您是否為講者、並顯示講者頁面。</p>
+        <p>若講者要在自己的電腦上顯示學生介面，請使用無痕 / 隱私瀏覽模式。</p>
+      </div>
+
+      <hr>
+      
+      <form class="alert alert-block" method="post" action="renew">
+        <h4>變更教室號碼</h4>
+        <p>我們已記錄您擔任講者的教室號碼為 「<%= roomId %>」。</p>
+        <p>進入同一個教室號碼的您與學生，將會看到同屬此教室的發問問題。</p>
+        <p>若要講新的投影片，請按「變更教室號碼」取得新的教室號碼，否則學生將看到上一份投影片裡的問題。您能擁有的教室號碼只有一個，按下「變更教室號碼」之後，您就不是「<%= roomId %>」的講者了。</p>
+
+        <button type="submit" class="btn btn-danger">
+          變更教室號碼
+        </button>
+      </form>
+    </div>
+
+
+    <!-- // <script type="text/javascript" src="/javascripts/dependencies.js"></script> -->
+    <!-- // <script type="text/javascript" src="/socket.io/socket.io.js"></script> -->
   </body>
 </html>
