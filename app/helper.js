@@ -31,9 +31,17 @@ exports.getFlashObject = function(req){
 exports.setAuthToken = function(res, roomId){
   res.cookie('auth_token', roomId, { signed: true, httpOnly: true });
   return roomId;
-}
+};
+
+exports.clearAuthToken = function(res){
+  res.clearCookie('auth_token');
+};
+
+exports.getRoomIdFromAuthToken = function(req){
+  return req.signedCookies.auth_token;
+};
 
 // Check if the user is lecturer.
 exports.checkAuthToken = function(req, roomId){
   return req.signedCookies.auth_token == roomId;
-}
+};

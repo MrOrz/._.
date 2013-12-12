@@ -64,8 +64,9 @@ app.configure('development', function(){
 });
 
 app.get('/', controllers.index);
-app.post('/create', controllers.create);
-app.get('/dashboard/:id', controllers.dashboard);
+app.post('/renew', controllers.renew);
+// app.post('/create', controllers.create);
+// app.get('/dashboard/:id', controllers.dashboard);
 app.get('/c.js', cors(), controllers.serveClient)
 app.get('/testpage', controllers.testpage);
 
