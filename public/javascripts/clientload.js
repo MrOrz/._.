@@ -8,7 +8,9 @@
   var styleList = [
     '/stylesheets/style.css'
   ];
-  window.iHaveQUrl = 'http://localhost:3000';
+  
+  var serverUrl = document.querySelector('#°▽°ﾉ').src.replace('/c.js', '');
+
   function loadScript() {
     if (0 == scriptList.length) {
       return;
@@ -16,7 +18,7 @@
     var s = document.createElement('script');
     var t = document.getElementsByTagName('script')[0];
     s.type = 'text/javascript';
-    s.src = window.iHaveQUrl + scriptList[0];
+    s.src = serverUrl + scriptList[0];
     s.onload = loadScript;
     t.parentNode.insertBefore(s, t);
     scriptList.shift();
@@ -28,7 +30,7 @@
     var s = document.createElement('link');
     var t = document.getElementsByTagName('link')[0];
     s.rel = "stylesheet";
-    s.href = window.iHaveQUrl + styleList[0];
+    s.href = serverUrl + styleList[0];
     s.onload = loadStyle;
     t.parentNode.insertBefore(s, t);
     styleList.shift();
