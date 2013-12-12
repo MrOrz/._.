@@ -589,3 +589,41 @@ input{
   background-size:30px 30px;
   z-index: 10000000000;
 }
+
+.reveal section img.logo{
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  vertical-align: middle;
+  margin-right: 20px;
+  margin-top:-80px;
+  animation:myfirst 4s infinite;
+  -webkit-animation:myfirst 4s infinite; /* Safari and Chrome */
+  animation-direction:alternate;
+  -webkit-animation-direction:alternate; /* Safari and Chrome */
+}
+
+@keyframes myfirst
+{
+0%   {margin-top:-80px;}
+35%  {margin-top:-150px;}
+50%   {margin-top:-80px;}
+65%  {margin-top:-150px;}
+80%  {margin-top:50px;}
+100% {margin-top:-150px;}
+}
+
+@-webkit-keyframes myfirst /* Safari and Chrome */
+{
+0%   {margin-top:-80px;}
+35%  {margin-top:-150px;}
+50%   {margin-top:-80px;}
+65%  {margin-top:-150px;}
+90%  {margin-top:50px;}
+100% {margin-top:-150px;}
+}
+
+#slide-title {
+  margin-left: -100px;
+}
+
