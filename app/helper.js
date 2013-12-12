@@ -5,8 +5,28 @@ var ROOMKEY = 'ldashlhrntlawerfcasdf'
 exports.generateRoomId = function(){
   return crypto.createHmac('sha1', ROOMKEY)
     .update("" + new Date).digest('hex').slice(3,7);
+};
 
-}
+exports.getFlashObject = function(req){
+  var success = req.flash('success').join('<br>'),
+      error = req.flash('error').join('<br>');
+
+  if(success){
+    return {
+      type: 'success',
+      text: success
+    }
+  }
+
+  if(error){
+    return {
+      type: 'error',
+      text: error
+    }
+  }
+
+  return null;
+};
 
 exports.setAuthToken = function(res, roomId){
   res.cookie('auth_token', roomId, { signed: true, httpOnly: true });

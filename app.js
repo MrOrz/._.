@@ -11,6 +11,7 @@ var express = require('express')
   , socketio = require('socket.io')
   , helper = require('./app/helper')
   , mongoose = require('mongoose')
+  , flash = require('connect-flash')
   , cors = require('cors');
 
 var app = express()
@@ -52,7 +53,8 @@ app.configure(function(){
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(cookieParser);
-  app.use(express.session());
+  app.use(express.session({secret: '9p8auewnlivf2v893q2oftertvserays', cookie: {maxAge: 60000}}));
+  app.use(flash());
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
 });
