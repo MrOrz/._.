@@ -1,0 +1,56 @@
+html, body{
+  height: 1px;
+  min-height: 100%;
+}
+
+.logo{
+  width: 671px;
+  height: 473px;
+  position: absolute;
+  bottom: 0;
+  right: 50%;
+  background: url('../images/owo.png') center bottom no-repeat;
+  opacity: .2;
+  animation: logo 1s ease-out infinite alternate;
+  -webkit-animation: logo 1s ease-out infinite alternate;
+  background-size: 110% 90%;
+  transition: opacity 0.5s ease;
+}
+
+.logo:hover{
+  opacity: 1;
+}
+
+@keyframes logo {
+  10% {
+    transform: translate(0, 0%);
+    -webkit-transform: translate(0, 0%);
+    background-size: 100% 100%;
+  }
+
+  100% {
+    transform: translate(0, -30%);
+    -webkit-transform: translate(0, -30%);
+    background-size: 100% 100%;
+  }
+}
+    
+@-webkit-keyframes logo {
+  10% {
+    transform: translate(0, 0%);
+    -webkit-transform: translate(0, 0%);
+    background-size: 100% 100%;
+  }
+
+  100% {
+    transform: translate(0, -30%);
+    -webkit-transform: translate(0, -30%);
+    background-size: 100% 100%;
+  }
+}
+
+.row{
+  max-width: 600px;
+  width: 50%;
+  margin-left: 50%;
+}

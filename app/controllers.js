@@ -5,7 +5,7 @@ var helper = require('./helper')
 // Homepage.
 exports.index = function(req, res){
   var embedUrl = req.protocol + "://" + req.get('host') +
-      'c.js';
+      '/c.js';
 
   var roomId = helper.getRoomIdFromAuthToken(req) || helper.generateRoomId();
   helper.setAuthToken(res, roomId);

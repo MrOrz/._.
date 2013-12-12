@@ -1,11 +1,10 @@
-
 /**
  * Module dependencies.
  */
 
 var express = require('express')
   , controllers = require('./app/controllers')
-  , roommanager = require('./app/roommanager')
+  , roomManager = require('./app/roommanager')
   , http = require('http')
   , path = require('path')
   , socketio = require('socket.io')
@@ -20,29 +19,35 @@ var app = express()
   , cookieParser = express.cookieParser('oiqwjuoi4eutnvaiojflkajpodiwdhugehqvoint;ortj[0qvt0,p92375ptqmtovkavawfvw');
 
 io.configure(function () {
-  io.set("transports", ["xhr-polling"]);
-  io.set("polling duration", 10);
+  // io.set("transports", ["xhr-polling"]);
+  // io.set("polling duration", 10);
   io.set('authorization', function(handshakeData, callback){
     console.log('Handshake', handshakeData);
     var roomId = handshakeData.query.roomId;
 
-    if(!roomId || !roommanager.get(roomId)){
+    // Check if there is room.
+    if(!roomId){
       callback(null, false);
       return;
     }
 
-    // Check cookie.
+    // If the room does not exist yet, create it.
+    if(!roomManager.get(roomId)){
+      roomManager.create(roomId);
+    }
+
+    // Check cookie and set handshakeData.
     cookieParser(handshakeData, {}, function(err){
       handshakeData.roomId = roomId;
       handshakeData.isLecturer = helper.checkAuthToken(handshakeData, roomId);
       callback(null, true);
-    })
+    });
   });
 });
 
-// Pass socket to roommanager,
-// delegating the socket events to roommanager.
-roommanager.setSockets(io.sockets);
+// Pass socket to roomManager,
+// delegating the socket events to roomManager.
+roomManager.setSockets(io.sockets);
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);

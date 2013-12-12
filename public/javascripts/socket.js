@@ -1,16 +1,21 @@
 (function(){
   "use strict";
-  var rid = /rid=([^&]+)/.exec(window.location.search);
-  if (!rid) {
-    console.log("no rid");
-  } else {
-    $("body").attr("data-room-id", rid[1]);
-  }
+  var scriptTag = document.querySelector('#°▽°ﾉ');
+  var roomId = scriptTag.dataset.roomId;
+  console.log('Room ID detected: ', roomId);
+  var serverUrl = scriptTag.src.replace('c.js', '');
+
+roomId
+  // if (!rid) {
+  //   console.log("no rid");
+  // } else {
+  //   $("body").attr("data-room-id", roomId[1]);
+  // }
 
   var userId = "" + Math.random();
 
-  var _socket = io.connect(window.iHaveQUrl || '/', {
-    query: 'roomId=' + $('body').attr('data-room-id')
+  var _socket = io.connect(serverUrl, {
+    query: 'roomId=' + roomId
   });
   _socket.on('connect', function (data) {
     console.log('Connected');
