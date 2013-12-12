@@ -20,8 +20,8 @@ var app = express()
   , cookieParser = express.cookieParser('oiqwjuoi4eutnvaiojflkajpodiwdhugehqvoint;ortj[0qvt0,p92375ptqmtovkavawfvw');
 
 io.configure(function () {
-  io.set("transports", ["xhr-polling"]);
-  io.set("polling duration", 10);
+  // io.set("transports", ["xhr-polling"]);
+  // io.set("polling duration", 10);
   io.set('authorization', function(handshakeData, callback){
     console.log('Handshake', handshakeData);
     var roomId = handshakeData.query.roomId;
