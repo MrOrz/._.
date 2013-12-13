@@ -159,6 +159,7 @@ socket.on('answer', function(data){
 });
 
 socket.on('plus', function(data){
+  questions[data.id].backers = data.backers;
   var questionElem = getQuestionElemById(data.id);
   $('.plus', questionElem).innerText = data.backers.length;
 });
