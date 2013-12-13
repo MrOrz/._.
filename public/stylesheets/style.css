@@ -204,6 +204,7 @@ input{
   padding: 6px;
   position: absolute;
   z-index: 100000;
+  display: none;
 }
 .ihq-popup-window input{
   width: 130px;
@@ -570,8 +571,8 @@ input{
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 }
 
-.add-question{
-  margin:10px 10px; 
+.add-question, .cancel-add-question{
+  margin:10px; 
   /*margin-left: auto;*/
   /*margin-right./: auto;*/
 }
@@ -588,4 +589,26 @@ input{
   background-size:30px 30px;
   position: absolute;
   z-index: 100000;
+}
+
+.add-question-hint{
+  color: white;
+  padding: 0 10px;
+  text-align: center;
+}
+
+.add-question-hint, .cancel-add-question, .ihq-state-1 .add-question, .ihq-state-2 .add-question{
+  display: none;
+}
+
+.ihq-state-1 .add-question-hint, .ihq-state-1 .cancel-add-question, .ihq-state-2 .cancel-add-question{
+  display: block;
+}
+
+.ihq-state-1 .ihq-enter-question, .ihq-state-2 .ihq-enter-question{
+  display: none;
+}
+
+.ihq-state-2 .ihq-popup-window{
+  display: block;
 }

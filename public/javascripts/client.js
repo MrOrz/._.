@@ -34,10 +34,10 @@ var helper = require('./helper.js'),
 var
 toolboxStr = [
   '<div class="ihq-tool">',
-    '<i class="icon-search">',
-    '</i>',
-    '<button class="add-question ihq-btn ihq-btn-warning" type="button">',
-    '我有問題！</button>',
+    '<i class="icon-search"></i>',
+    '<button class="add-question ihq-btn ihq-btn-warning" type="button">我有問題！</button>',
+    '<p class="add-question-hint">請在有問題的地方點一下！</p>',
+    '<button class="cancel-add-question ihq-btn ihq-btn-warning" type="button">取消發問</button>',
   '</div>',
   '<div class="ihq-question-queue">',
   '</div>'
@@ -71,10 +71,16 @@ var toolboxElem = helper.html2Elem(toolboxStr, 'div', {'class': 'ihq-tool-box'})
     questionBlockElem = helper.html2Elem(questionBlockStr, 'div', {'class': 'ihq-popup-window'}),
     toolboxQueue = $('.ihq-question-queue', toolboxElem);
 
-questionBlockElem.style.display = 'none';
 
 $('body').appendChild(toolboxElem);
 $('body').appendChild(questionBlockElem);
+
+function setState(newState){
+  $('body').classList.remove('ihq-state-' + askState);
+  $('body').classList.add('ihq-state-' + newState);
+  askState = newState;
+}
+setState(0);
 
 // =========
 // Presentor
@@ -104,8 +110,7 @@ $('.question-btn', questionBlockElem).addEventListener('click', function(){
     questionBlockElem.style.left,
     questionBlockElem.style.top, str);
 
-  questionBlockElem.style.display = 'none';
-  askState = 0;
+  setState(0);
 
   socket.emit('ask', instance, instance);
 });
@@ -234,14 +239,13 @@ window.addEventListener('hashchange', function(){
   }
 
   // Reset state
-  askState = 0;
+  setState(0);
 });
 
 // Adding question
 //
 $('.add-question', toolboxElem).addEventListener('click', function(e){
-  askState = 1;
-  questionBlockElem.style.display = 'none';
+  setState(1);
   e.stopPropagation();
 });
 
@@ -249,8 +253,12 @@ $('body').addEventListener('click', function(e){
   // Skip if not selecting question location
   if(askState !== 1){ return; }
 
-  askState = 2;
+  setState(2);
   questionBlockElem.style.left = e.pageX + 'px';
   questionBlockElem.style.top = e.pageY + 'px';
-  questionBlockElem.style.display = 'block';
+});
+
+$('.cancel-add-question', toolboxElem).addEventListener('click', function(e){
+  setState(0);
+  e.stopPropagation();
 });
