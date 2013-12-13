@@ -52,7 +52,8 @@ exports.setSockets = function(s){
 
     // Send init data
     socket.emit('init', {
-      questions: room.questions
+      questions: room.questions,
+      isLecturer: isLecturer
     });
 
     // broadcast helper of current room.
@@ -61,49 +62,52 @@ exports.setSockets = function(s){
     };
 
     // Event handling
-    socket.on('client:draw', function(data){
-      console.log('client draw', data);
-    });
-    socket.on('client:ask', function(question){
-      console.log('client ask', question);
+    socket.on('ask', function(instance){
+      console.log('ask', instance);
 
-      room.questions[question.id] = question;
-      broadcast('ask', question);
+      room.questions[instance.id] = instance;
+      broadcast('ask', instance);
     });
-    socket.on('client:plus', function(questionId){
-      var question = room.questions[questionId];
-      if(!question){
-        console.error(room.questions)
-      return};
+    socket.on('plus', function(data){
+      var instance = room.questions[data.id];
 
-      question.count += 1;
+      if(!instance){
+        console.error("No such question instance id in room", roomId, ": ", data.id);
+        return;
+      }
+
+      if(instance.backers.indexOf(data.$$userId) === -1){
+        instance.backers.push(data.$$userId);
+      }
+
       broadcast('plus', {
-        id: questionId, count: question.count
+        id: instance.id, backers: instance.backers
       });
     })
-    socket.on('server:answer', function(questionId){
+    socket.on('answer', function(data){
       if(!isLecturer) return; // Ignore non-lecturer requests
-      var question = room.questions[questionId];
+      var question = room.questions[data.id];
+
       if(!question){
-        console.error(questionId, room.questions);
-        return
-      };
+        console.error("No such question instance id in room", roomId, ": ", data.id);
+        return;
+      }
 
       question.state = 1;
       console.log('server answer', question);
-      broadcast('answer', question);
+      broadcast('answer', data);
     });
-    socket.on('server:over', function(data){
-      if(!isLecturer) return; // Ignore non-lecturer requests
+    // socket.on('server:over', function(data){
+    //   if(!isLecturer) return; // Ignore non-lecturer requests
 
-      console.log('server over', data);
-      //roommanager.close();
-      broadcast('over', data);
-    });
-    socket.on('server:pagechange', function(data){
-      if(!isLecturer) return; // Ignore non-lecturer requests
+    //   console.log('server over', data);
+    //   //roommanager.close();
+    //   broadcast('over', data);
+    // });
+    // socket.on('server:pagechange', function(data){
+    //   if(!isLecturer) return; // Ignore non-lecturer requests
 
-      broadcast('pagechange', data);
-    });
+    //   broadcast('pagechange', data);
+    // });
   });
 };
