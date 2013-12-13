@@ -10,9 +10,7 @@ var express = require('express')
   , browserify = require('browserify-middleware')
   , socketio = require('socket.io')
   , helper = require('./app/helper')
-  , mongoose = require('mongoose')
-  , flash = require('connect-flash')
-  , cors = require('cors');
+  , flash = require('connect-flash');
 
 var app = express()
   , server = http.createServer(app)
@@ -20,8 +18,6 @@ var app = express()
   , cookieParser = express.cookieParser('oiqwjuoi4eutnvaiojflkajpodiwdhugehqvoint;ortj[0qvt0,p92375ptqmtovkavawfvw');
 
 io.configure(function () {
-  // io.set("transports", ["xhr-polling"]);
-  // io.set("polling duration", 10);
   io.set('authorization', function(handshakeData, callback){
     console.log('Handshake', handshakeData);
     var roomId = handshakeData.query.roomId;
@@ -71,10 +67,7 @@ app.configure('development', function(){
 
 app.get('/', controllers.index);
 app.post('/renew', controllers.renew);
-// app.post('/create', controllers.create);
-// app.get('/dashboard/:id', controllers.dashboard);
 app.get('/c.js', browserify('./public/javascripts/client.js'));
-// app.get('/testpage', controllers.testpage);
 
 server.listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));

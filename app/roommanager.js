@@ -7,17 +7,7 @@ var url = require('url')
 
 var Room = function(roomId){
   this.id = roomId; // The room id (key)
-  // this.drawings = {};
   this.questions = {};
-
-  // var urlObj = url.parse(this.slideUrl, true);
-  // urlObj.query = urlObj.query || {};
-  // urlObj.query.rid = this.id;
-
-  // this.clientUrl = url.format(urlObj); // The url lecturer gives to students
-
-  // urlObj.query.sync = 1;
-  // this.projectorUrl = url.format(urlObj); // The url used in projector.
 }
 
 exports.create = function(roomId){
@@ -97,17 +87,5 @@ exports.setSockets = function(s){
       delete room.questions[data.id];
       broadcast('answer', data);
     });
-    // socket.on('server:over', function(data){
-    //   if(!isLecturer) return; // Ignore non-lecturer requests
-
-    //   console.log('server over', data);
-    //   //roommanager.close();
-    //   broadcast('over', data);
-    // });
-    // socket.on('server:pagechange', function(data){
-    //   if(!isLecturer) return; // Ignore non-lecturer requests
-
-    //   broadcast('pagechange', data);
-    // });
   });
 };
