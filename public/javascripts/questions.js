@@ -1,6 +1,6 @@
-var Socket = undefined;
+var socket = require('./socket');
 
-var Question = Backbone.Model.extend({
+exports.Question = Backbone.Model.extend({
   initialize: function() {
     if(!this.get('id')){
       this.set('id', "" + Math.random());
@@ -11,7 +11,7 @@ var Question = Backbone.Model.extend({
     'location': {
       'x': 0,
       'y': 0,
-      'pageurl': '',
+      'pageurl': ''
     },
     // repeat or question
     'type': 0,
@@ -20,17 +20,17 @@ var Question = Backbone.Model.extend({
     // done, or to be answer
     'state': 0,
     // +1
-    'count': 0,
-  },
+    'count': 0
+  }
 });
 
-var Questions = Backbone.Collection.extend({
+exports.Questions = Backbone.Collection.extend({
   initialize: function(options) {
   },
-  model: Question,
+  model: exports.Question
 });
 
-var QuestionView = Backbone.View.extend({
+exports.QuestionView = Backbone.View.extend({
   initialize: function() {
     this.collection.bind('add', this.addQuestion, this);
     this.collection.bind('reset', this.addAllQuestions, this);
@@ -45,7 +45,7 @@ var QuestionView = Backbone.View.extend({
   events: {
     'click .content': 'gotoQuestion',
     'click .delete': 'doneQuestion',
-    'click .plus': 'plusOneQuestion',
+    'click .plus': 'plusOneQuestion'
   },
   addQuestion: function(model) {
     console.log(model);
@@ -80,11 +80,11 @@ var QuestionView = Backbone.View.extend({
     });
   },
   addQuestionRemote: function(data){
-    this.collection.add(new Question(data));
+    this.collection.add(new exports.Question(data));
   },
   changeQuestionState: function(model) {
     console.log('changeQuestionState', model);
-    var mid = model.cid
+    var mid = model.cid;
     $("[mid="+mid+"]").remove();
   },
   changeQuestionCount: function(model) {
@@ -130,7 +130,7 @@ var QuestionView = Backbone.View.extend({
     } else {
       window.location.hash = model.get('location').pageurl;
     }
-  },
+  }
 });
 /*
   var questionCollection = new Questions();
