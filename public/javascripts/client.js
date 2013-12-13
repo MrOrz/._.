@@ -1,20 +1,17 @@
-var serverUrl = document.querySelector('#°▽°ﾉ').src.replace('/c.js', '');
+var socket = require('./socket'),
+    cls = require('./questions'),
+    helper = require('./helper.js');
 
 function loadStyle(url) {
   var s = document.createElement('link');
   var t = document.getElementsByTagName('link')[0];
   s.rel = "stylesheet";
-  s.href = serverUrl + url;
+  s.href = helper.serverUrl + url;
   s.onload = loadStyle;
   t.parentNode.insertBefore(s, t);
 }
 
 loadStyle('/stylesheets/style.css');
-
-// loadScript(serverUrl + '/socket.io/socket.io.js');
-
-var socket = require('./socket'),
-    cls = require('./questions');
 
 // append bar
 var stringBuild = [
