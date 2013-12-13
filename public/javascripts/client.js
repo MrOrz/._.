@@ -101,8 +101,8 @@ $('body').appendChild(questionBlockElem);
 $('.question-btn', questionBlockElem).addEventListener('click', function(){
   var str = $('.question-text', questionBlockElem).value;
   var instance = new Question(
-    parseInt(questionBlockElem.style.left, 10),
-    parseInt(questionBlockElem.style.top, 10), str);
+    questionBlockElem.style.left,
+    questionBlockElem.style.top, str);
 
   questionBlockElem.style.display = 'none';
   askState = 0;
