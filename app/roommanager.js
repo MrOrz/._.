@@ -93,8 +93,8 @@ exports.setSockets = function(s){
         return;
       }
 
-      question.state = 1;
       console.log('server answer', question);
+      delete room.questions[data.id];
       broadcast('answer', data);
     });
     // socket.on('server:over', function(data){
