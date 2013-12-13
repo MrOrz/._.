@@ -69,11 +69,13 @@ helper.loadStyle('/stylesheets/style.css');
 
 var toolboxElem = helper.html2Elem(toolboxStr, 'div', {'class': 'ihq-tool-box'}),
     questionBlockElem = helper.html2Elem(questionBlockStr, 'div', {'class': 'ihq-popup-window'}),
+    thumbElem = helper.html2Elem("", "div", {'class': 'ihq-tool-thumb'}),
     toolboxQueue = $('.ihq-question-queue', toolboxElem);
 
 
 $('body').appendChild(toolboxElem);
 $('body').appendChild(questionBlockElem);
+$('body').appendChild(thumbElem);
 
 function setState(newState){
   $('body').classList.remove('ihq-state-' + askState);
@@ -261,4 +263,8 @@ $('body').addEventListener('click', function(e){
 $('.cancel-add-question', toolboxElem).addEventListener('click', function(e){
   setState(0);
   e.stopPropagation();
+});
+
+thumbElem.addEventListener('click', function(){
+  $('body').classList.toggle('ihq-toolbox-active');
 });

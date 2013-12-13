@@ -68,12 +68,33 @@
 .ihq-tool-box{
 	background-color: rgba(0,0,0,0.7);
 	position: fixed;
-	right:0px;
+	left:0px;
 	height:100%;
 	width:150px;
 	top:0px;
   z-index: 1000000;
+  -webkit-transition: transform 1s ease;
+  -webkit-transform: translate(-150px, 0);
 }
+
+.ihq-toolbox-active .ihq-tool-box{
+  -webkit-transform: translate(0px, 0);
+}
+
+.ihq-tool-thumb{
+  width: 50px;
+  height: 35px;
+  padding: 10px;
+  background: rgba(0,0,0,.7) url('../images/owo_thumb.png') no-repeat center center;
+  position: absolute;
+  left: 0;
+  top: 100px;
+}
+
+.ihq-toolbox-active .ihq-tool-thumb{
+  -webkit-transform: translate(150px, 0);
+}
+
 .ihq-tool-box .content{
   width: 116px;
 }
