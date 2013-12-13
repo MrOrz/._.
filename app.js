@@ -7,6 +7,7 @@ var express = require('express')
   , roomManager = require('./app/roommanager')
   , http = require('http')
   , path = require('path')
+  , browserify = require('browserify-middleware')
   , socketio = require('socket.io')
   , helper = require('./app/helper')
   , mongoose = require('mongoose')
@@ -72,8 +73,8 @@ app.get('/', controllers.index);
 app.post('/renew', controllers.renew);
 // app.post('/create', controllers.create);
 // app.get('/dashboard/:id', controllers.dashboard);
-app.get('/c.js', cors(), controllers.serveClient)
-app.get('/testpage', controllers.testpage);
+app.get('/c.js', browserify('./public/javascripts/client.js'));
+// app.get('/testpage', controllers.testpage);
 
 server.listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));

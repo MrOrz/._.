@@ -1,40 +1,74 @@
-(function(){
-  "use strict";
-  var scriptTag = document.querySelector('#°▽°ﾉ');
-  var roomId = scriptTag.dataset.roomId;
-  console.log('Room ID detected: ', roomId);
-  var serverUrl = scriptTag.src.replace('c.js', '');
+/**
+  A socket wrapper that
+  1. Adds userId internally to identify individual users, and
+  2. Triggers callback immediately on local machine.
 
-roomId
-  // if (!rid) {
-  //   console.log("no rid");
-  // } else {
-  //   $("body").attr("data-room-id", roomId[1]);
-  // }
+                            Socket Wrapper
+                             (socket.js)
+                     __________________________
+               emit  |                        |  emit
+             <-------+----+-------------------|<------
+  SocketIO           |   /                    |            Presenter
+   Server            |   \ (locally trigger)  |           (client.js)
+             ------->|----+-------------------+------>
+            broadcast|________________________|  on
 
-  var userId = "" + Math.random();
+  Please notice that under this implementation, event handlers bound using .on()
+  IS EXPECTED TO EXECUTE TWICE if the current user is the emitter of an event.
+  The event handlers should take care for the side-effects within the event
+  handler!
 
-  var _socket = io.connect(serverUrl, {
-    query: 'roomId=' + roomId
+*/
+
+var io = require('socket.io-client'),
+    helper = require('./helper');
+
+// userId that identifies each user
+var userId = ("" + Math.random()).slice(2);
+
+// socket-io socket
+//
+var socket = io.connect(helper.serverUrl, {
+  query: 'roomId=' + helper.roomId
+});
+socket.on('connect', function (data) {
+  console.log('Connected');
+});
+
+// Internally keeps track of all callbacks.
+var callbacks = {};
+
+// Wrapped socket emit()
+// When invoked, the callback on this event is immediately triggered
+// with expectedResult. When socketIO server returns a justified result,
+// the callback on the event will be triggered twice.
+//
+exports.emit = function(evt, data, expectedResult){
+  // Append userId in data then emit.
+  data.$$userId = userId;
+  socket.emit(evt, data);
+
+  // Trigger the callbacks of this event with expectedResult.
+  if(callbacks[evt] && callbacks[evt].length > 0){
+    callbacks[evt].forEach(function(cb){
+      cb(expectedResult);
+    });
+  }
+};
+
+// Wrapped socket on()
+//
+exports.on = function(evt, callback){
+
+  // Internally keeps track of the event handlers.
+  if(!callbacks[evt]){ callbacks[evt] = []; }
+  callbacks[evt].push(callback);
+
+  // Bind event on socket.
+  socket.on(evt, function(data){
+    callback(data);
   });
-  _socket.on('connect', function (data) {
-    console.log('Connected');
-  });
+};
 
-  // Current-user aware socket.
-  window.socket = {
-    emit: function(evt, data){
-      // Append user id in data.
-      data.userId = userId;
-      _socket.emit(evt, data);
-    },
-    on: function(evt, callback){
-      // Check user id.
-      _socket.on(evt, function(data){
-        if(data.userId !== userId){
-          callback(data);
-        }
-      });
-    }
-  };
-}());
+// Expose the userId.
+exports.userId = userId;

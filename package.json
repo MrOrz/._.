@@ -10,9 +10,11 @@
     "ejs": "*",
     "async": "*",
     "socket.io": "*",
+    "socket.io-client": "*",
     "mongoose": "*",
     "cors": "*",
-    "connect-flash": "*"
+    "connect-flash": "*",
+    "browserify-middleware": "*"
   },
   "engines": {
     "node": "0.10.x",
