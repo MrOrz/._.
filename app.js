@@ -74,7 +74,7 @@ app.post('/renew', controllers.renew);
 // app.post('/create', controllers.create);
 // app.get('/dashboard/:id', controllers.dashboard);
 app.get('/c.js', browserify('./public/javascripts/client.js'));
-app.get('/testpage', controllers.testpage);
+// app.get('/testpage', controllers.testpage);
 
 server.listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
