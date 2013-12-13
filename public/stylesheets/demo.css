@@ -1,8 +1,11 @@
-.reveal section img.ie, .reveal section img.logo {
+.reveal section img.ie,.reveal section img.html5logo, .reveal section img.logo {
   border: 0;
   background: transparent;
   box-shadow: none;
   vertical-align: middle;
+}
+.ie {
+  padding-left: -40px;
 }
 .reveal section img.logo{
   margin-right: 20px;
