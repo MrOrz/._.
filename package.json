@@ -11,8 +11,6 @@
     "async": "*",
     "socket.io": "*",
     "socket.io-client": "*",
-    "mongoose": "*",
-    "cors": "*",
     "connect-flash": "*",
     "browserify-middleware": "*"
   },
