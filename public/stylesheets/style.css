@@ -1,41 +1,3 @@
-body {
-  padding: 10px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
-a {
-  color: #00B7FF;
-}
-
-.section{
-	margin-bottom: 30px;
-	padding-top: 20px;
-}
-
-.btn{
-	margin-top: 10px;
-}
-
-.start{
-	width:200px;
-	height: 50px;
-	margin-top: 10px;
-	font-size: 22px;
-}
-
-.script{
-	margin: 0;
-	width: 500px;
-	background: rgba(211,211,211,0.3);
-	width: 100%;
-}
-legend{
-	margin-bottom: 5px;
-}
-input{
-	width: 100%;
-}
-
 .ihq-question-queue{
 	width:302px;
 	height: 404px;
@@ -47,53 +9,30 @@ input{
 	overflow-x: hidden;
 }
 
-.slide-window{
-	width: 800px;
-	height: 600px;
-	/*border: 1px solid black;*/
-	box-shadow: 0px 1px 3px rgba(0,0,0,0.7);
-}
-
-.for-student{
-	width:100%;
-	/*height: 100px;*/
-}
-.subtitle{
-  font-size: 17px;
-  margin-bottom: 4px;
-  margin-top: 10px;
-}
-.student-url{
-	background: rgba(226, 246, 255, 0.8);
-  width:260px;
-  padding: 10px;
-  height: 100px;
-}
-
 .one-question{
 	width: 290px;
 	padding-bottom: 2px;
 	margin-bottom: 5px;
 }
-.content{
+.one-question .content{
 	border: 1px solid rgba(211,211,211,1);
 	width: 240px;
 	min-height: 50px;
   background: rgb(255,255,255);
 }
-.content:hover{
+.one-question .content:hover{
 	background: rgba(226, 246, 255, 0.8);
 }
-.desc{
+.one-question .desc{
   width:35px;
   height:35px;
 }
-.desc, .content{
+.one-question .desc, .one-question .content{
 	display: inline-block;
   vertical-align: top;
 }
 
-.plus{
+.one-question .plus{
   background: rgba(255, 179, 179, 1);
   /*display: none;*/
 }
@@ -118,40 +57,6 @@ input{
   background: rgba(255, 124, 124, 1);
 }
 
-.clock{
-	margin-top: 10px;
-}
-.clock, .project-window{
-	display: inline-block;
-}
-.project-btn, .over-btn{
-	float: right;
-	right: 10px;
-  margin-left: 5px; 
-}
-.left-section, .right-section{
-	display: inline-block;
-	vertical-align: top;
-	margin-right: 20px;
-	margin-left: 30px;
-}
-.left-section{
-	width:800px;
-}
-
-.right-section{
-	position: relative;
-	height: 638px;
-	width: 280px;
-}
-
-.over-ihq-btn{
-	position: absolute;
-	margin-top: 30px;
-	bottom: 0px;
-	left: 0px;
-}
-
 .main{
   width:1207px;
   margin-left: auto;
@@ -163,12 +68,33 @@ input{
 .ihq-tool-box{
 	background-color: rgba(0,0,0,0.7);
 	position: fixed;
-	right:0px;
+	left:0px;
 	height:100%;
 	width:150px;
 	top:0px;
   z-index: 1000000;
+  -webkit-transition: transform 1s ease;
+  -webkit-transform: translate(-150px, 0);
 }
+
+.ihq-toolbox-active .ihq-tool-box{
+  -webkit-transform: translate(0px, 0);
+}
+
+.ihq-tool-thumb{
+  width: 50px;
+  height: 35px;
+  padding: 10px;
+  background: rgba(0,0,0,.7) url('../images/owo_thumb.png') no-repeat center center;
+  position: absolute;
+  left: 0;
+  top: 100px;
+}
+
+.ihq-toolbox-active .ihq-tool-thumb{
+  -webkit-transform: translate(150px, 0);
+}
+
 .ihq-tool-box .content{
   width: 116px;
 }
@@ -204,6 +130,7 @@ input{
   padding: 6px;
   position: absolute;
   z-index: 100000;
+  display: none;
 }
 .ihq-popup-window input{
   width: 130px;
@@ -570,8 +497,8 @@ input{
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 }
 
-.add-question{
-  margin:10px 10px; 
+.add-question, .cancel-add-question{
+  margin:10px; 
   /*margin-left: auto;*/
   /*margin-right./: auto;*/
 }
@@ -588,4 +515,26 @@ input{
   background-size:30px 30px;
   position: absolute;
   z-index: 100000;
+}
+
+.add-question-hint{
+  color: white;
+  padding: 0 10px;
+  text-align: center;
+}
+
+.add-question-hint, .cancel-add-question, .ihq-state-1 .add-question, .ihq-state-2 .add-question{
+  display: none;
+}
+
+.ihq-state-1 .add-question-hint, .ihq-state-1 .cancel-add-question, .ihq-state-2 .cancel-add-question{
+  display: block;
+}
+
+.ihq-state-1 .ihq-enter-question, .ihq-state-2 .ihq-enter-question{
+  display: none;
+}
+
+.ihq-state-2 .ihq-popup-window{
+  display: block;
 }
