@@ -4,8 +4,14 @@ var helper = require('./helper')
 
 // Homepage.
 exports.index = function(req, res){
-  var embedUrl = req.protocol + "://" + req.host + ':' + req.app.settings.port +
-      '/c.js';
+
+  // Make sure owo port number is added to the embed URL so that
+  // Socket.io client does not pick up slide host's port number.
+  var host = req.get('host');
+  if(host.indexOf(':') === -1){
+    host += ':80';
+  }
+  var embedUrl = req.protocol + "://" + host + '/c.js';
 
   // If the user doesn't own any roomIds, add one.
   var roomIds = helper.getRoomIdsFromAuthToken(req)
