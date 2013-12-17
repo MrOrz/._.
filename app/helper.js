@@ -55,6 +55,6 @@ exports.getRoomIdsFromAuthToken = function(req){
 
 // Check if the user is lecturer.
 exports.checkAuthToken = function(req, roomId){
-  var roomIds = getRoomIdsFromAuthToken(req);
+  var roomIds = exports.getRoomIdsFromAuthToken(req);
   return roomIds.indexOf(roomId) !== -1;
 };

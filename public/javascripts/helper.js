@@ -19,9 +19,9 @@ function $$ (selector, el, useArray) {
 
 var scriptTag = $('#°▽°ﾉ');
 
-exports.$ = $
-exports.$$ = $$
 exports.serverUrl = scriptTag.src.replace('/c.js', '');
+exports.$ = $;
+exports.$$ = $$;
 exports.roomId = scriptTag.dataset.roomId;
 exports.loadStyle = function(url) {
   var s = document.createElement('link');
