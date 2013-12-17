@@ -4,7 +4,7 @@ var helper = require('./helper')
 
 // Homepage.
 exports.index = function(req, res){
-  var embedUrl = req.protocol + "://" + req.get('host') +
+  var embedUrl = req.protocol + "://" + req.host + ':' + req.app.settings.port +
       '/c.js';
 
   // If the user doesn't own any roomIds, add one.

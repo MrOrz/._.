@@ -19,9 +19,12 @@ function $$ (selector, el, useArray) {
 
 var scriptTag = $('#°▽°ﾉ');
 
-exports.serverUrl = scriptTag.src.replace('/c.js', '');
 exports.$ = $;
 exports.$$ = $$;
+
+// Prefer scriptTag.getAttribute over scriptTag.src to fetch port number.
+exports.serverUrl = scriptTag.getAttribute('src').replace('/c.js', '');
+
 exports.roomId = scriptTag.dataset.roomId;
 exports.loadStyle = function(url) {
   var s = document.createElement('link');
