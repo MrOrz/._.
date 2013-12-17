@@ -19,28 +19,34 @@
         <legend>請複製下面 HTML 標記到 <code>&lt;/body&gt;</code> 前：</legend>
         <pre class="script">
 &lt;script type="text/javascript"
-src="<%= embedUrl %>" id="°▽°ﾉ" data-room-id="<%= roomId %>"&gt;&lt;/script&gt;
+src="<%= embedUrl %>" id="°▽°ﾉ" data-room-id="<%= roomIds[roomIds.length-1] %>"&gt;&lt;/script&gt;
         </pre>
       </div>
 
+      <h4>投影片編號</h4>
+      <p>以下為您主講的投影片編號。點進同一份投影片的老師和學生，會看到同一組問題。</p>
+      <ul>
+        <% roomIds.forEach(function(roomId){ %>
+          <li><%= roomId %></li>
+        <% }); %>
+      </ul>
+
+      <form style="display: inline-block;" method="post" action="add">
+        <button type="submit" class="btn btn-info">
+          取得新投影片編號
+        </button>
+      </form>
+      <form style="display: inline-block;" method="post" action="clear">
+        <button type="submit" class="btn btn-danger">
+          清除現有投影片編號
+        </button>
+      </form>
+      <br><br>
       <div class="alert alert-block alert-info">
         <h4>Cookie 的使用</h4>
         <p>我們使用您正瀏覽此頁面之 Cookie 來判斷您是否為講者、並顯示講者介面。</p>
         <p>若講者要在自己的電腦上顯示學生介面，請使用無痕 / 隱私瀏覽模式。</p>
       </div>
-
-      <hr>
-      
-      <form class="alert alert-block" method="post" action="renew">
-        <h4>投影片編號</h4>
-        <p>我們已記錄您擔任講者的投影片編號為 「<%= roomId %>」。</p>
-        <p>點進同一份投影片的老師和學生，會看到同一組問題。</p>
-        <p>若要講新的投影片，請按「取得新投影片編號」，否則學生們將看到上一份投影片裡的問題。要注意的是您只能主講一份投影片；在您取得新的投影片編號後，您就不是「<%= roomId %>」這份投影片的講者了。</p>
-
-        <button type="submit" class="btn btn-danger">
-          取得新投影片編號
-        </button>
-      </form>
     </div>
   </body>
 </html>
