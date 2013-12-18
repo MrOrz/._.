@@ -28,20 +28,33 @@ exports.getFlashObject = function(req){
   return null;
 };
 
-exports.setAuthToken = function(res, roomId){
-  res.cookie('auth_token', roomId, { signed: true, httpOnly: true });
-  return roomId;
+exports.setAuthToken = function(res, roomIds){
+  res.cookie('auth_token', JSON.stringify(roomIds), { signed: true, httpOnly: true });
+  return roomIds;
 };
 
 exports.clearAuthToken = function(res){
   res.clearCookie('auth_token');
 };
 
-exports.getRoomIdFromAuthToken = function(req){
-  return req.signedCookies.auth_token;
+exports.getRoomIdsFromAuthToken = function(req){
+  var str = req.signedCookies.auth_token, result;
+
+  if(!str){
+    result = [];
+  }else{
+    try {
+      result = JSON.parse(str);
+    } catch (e) { // Legacy cookies goes here.
+      result = [ str ];
+    }
+  }
+
+  return result;
 };
 
 // Check if the user is lecturer.
 exports.checkAuthToken = function(req, roomId){
-  return req.signedCookies.auth_token == roomId;
+  var roomIds = exports.getRoomIdsFromAuthToken(req);
+  return roomIds.indexOf(roomId) !== -1;
 };

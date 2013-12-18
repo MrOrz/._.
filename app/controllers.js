@@ -4,59 +4,47 @@ var helper = require('./helper')
 
 // Homepage.
 exports.index = function(req, res){
-  var embedUrl = req.protocol + "://" + req.get('host') +
-      '/c.js';
 
-  var roomId = helper.getRoomIdFromAuthToken(req) || helper.generateRoomId();
-  helper.setAuthToken(res, roomId);
+  // Make sure owo port number is added to the embed URL so that
+  // Socket.io client does not pick up slide host's port number.
+  var host = req.get('host');
+  if(host.indexOf(':') === -1){
+    host += ':80';
+  }
+  var embedUrl = req.protocol + "://" + host + '/c.js';
 
-  console.log(helper.getFlashObject(req));
+  // If the user doesn't own any roomIds, add one.
+  var roomIds = helper.getRoomIdsFromAuthToken(req)
+  if( roomIds.length === 0 ){
+    roomIds.push(helper.generateRoomId());
+  }
+  helper.setAuthToken(res, roomIds);
 
   res.render('index', {
     embedUrl: embedUrl,
-    roomId: roomId,
+    roomIds: roomIds,
     flash: helper.getFlashObject(req)
   });
 };
 
-exports.renew = function(req, res){
-  helper.clearAuthToken(res);
-  req.flash('success', '教室號碼已經更新。');
+// Add a new roomId for the current user.
+exports.add = function(req, res){
+  var roomIds = helper.getRoomIdsFromAuthToken(req) || [];
+  roomIds.push( helper.generateRoomId() );
+  helper.setAuthToken( res, roomIds );
+
+  req.flash('success', '已新增投影片號碼。');
 
   res.redirect('/');
 }
 
+// Clears all existing roomIds for the current user.
+exports.clear = function(req, res){
+  helper.clearAuthToken(res);
+  req.flash('success', '投影片號碼已經重設。');
 
-// Lecturer page.
-// exports.dashboard = function(req, res){
-//   console.log('slide id:', req.params.id);
-//   var roomId = req.params.id;
-
-//   // Check lecturer identity
-//   var isLecturer = helper.checkAuthToken(req, roomId);
-
-//   if(!isLecturer){
-//     res.redirect('/')
-//   }
-//   res.render('dashboard', {
-//     roomId: roomId,
-//     studentUrl: roommanager.get(roomId).clientUrl
-//   });
-// };
-
-// Lecturer creating new slide.
-// exports.create = function(req, res){
-//   console.log('created room param:', req.body);
-
-//   // Creating room
-//   var room = roommanager.create(helper.generateRoomId(), req.body.url);
-
-//   // Set cookies for lecturer.
-//   helper.setAuthToken(res, room.id);
-
-//   // Redirect the lecturer to his/her dashboard.
-//   res.redirect('/dashboard/'+room.id);
-// }
+  res.redirect('/');
+}
 
 exports.serveClient = function(req, res){
   res.sendfile("public/javascripts/clientload.js");
