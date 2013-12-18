@@ -45,11 +45,3 @@ exports.clear = function(req, res){
 
   res.redirect('/');
 }
-
-exports.serveClient = function(req, res){
-  res.sendfile("public/javascripts/clientload.js");
-}
-
-exports.testpage = function(req, res) {
-  res.sendfile("public/reveal-js.html");
-}

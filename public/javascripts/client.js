@@ -33,20 +33,20 @@ var helper = require('./helper.js'),
 
 var
 toolboxStr = [
-  '<div class="ihq-tool">',
+  '<div class="owo-tool">',
     '<i class="icon-search"></i>',
-    '<button class="add-question ihq-btn ihq-btn-warning" type="button">我有問題！</button>',
+    '<button class="add-question owo-btn owo-btn-warning" type="button">我有問題！</button>',
     '<p class="add-question-hint">請在有問題的地方點一下！</p>',
-    '<button class="cancel-add-question ihq-btn ihq-btn-warning" type="button">取消發問</button>',
+    '<button class="cancel-add-question owo-btn owo-btn-warning" type="button">取消發問</button>',
   '</div>',
-  '<div class="ihq-question-queue">',
+  '<div class="owo-question-queue">',
   '</div>'
 ].join(''),
 questionBlockStr = [
   "<div>",
-    '<div class="ihq-enter-question">輸入問題</div>',
+    '<div class="owo-enter-question">輸入問題</div>',
     "<input type='text' class='question-text' value='請再重複一次'></input>",
-    "<button class='question-btn ihq-btn ihq-btn-primary'>送出</button>",
+    "<button class='question-btn owo-btn owo-btn-primary'>送出</button>",
   "</div>",
 ].join("");
 
@@ -67,10 +67,10 @@ var askState = 0;
 // ==============
 helper.loadStyle('/stylesheets/style.css');
 
-var toolboxElem = helper.html2Elem(toolboxStr, 'div', {'class': 'ihq-tool-box'}),
-    questionBlockElem = helper.html2Elem(questionBlockStr, 'div', {'class': 'ihq-popup-window'}),
-    thumbElem = helper.html2Elem("", "div", {'class': 'ihq-tool-thumb'}),
-    toolboxQueue = $('.ihq-question-queue', toolboxElem);
+var toolboxElem = helper.html2Elem(toolboxStr, 'div', {'class': 'owo-tool-box'}),
+    questionBlockElem = helper.html2Elem(questionBlockStr, 'div', {'class': 'owo-popup-window'}),
+    thumbElem = helper.html2Elem("", "div", {'class': 'owo-tool-thumb'}),
+    toolboxQueue = $('.owo-question-queue', toolboxElem);
 
 
 $('body').appendChild(toolboxElem);
@@ -78,8 +78,8 @@ $('body').appendChild(questionBlockElem);
 $('body').appendChild(thumbElem);
 
 function setState(newState){
-  $('body').classList.remove('ihq-state-' + askState);
-  $('body').classList.add('ihq-state-' + newState);
+  $('body').classList.remove('owo-state-' + askState);
+  $('body').classList.add('owo-state-' + newState);
   askState = newState;
 }
 setState(0);
@@ -208,7 +208,7 @@ function addPointer(instance){
   if(window.location.hash !== instance.url) return;
 
   var pointerElem = helper.html2Elem("<i class='icon-map-marker'></i>", 'div',
-    {'class': 'ihq-pointer', title: instance.str, 'data-id': instance.id} );
+    {'class': 'owo-pointer', title: instance.str, 'data-id': instance.id} );
   pointerElem.style.left = instance.x;
   pointerElem.style.top = instance.y;
 
@@ -221,7 +221,7 @@ function getQuestionElemById(id){
   return $('.one-question[data-id="'+id+'"]', toolboxQueue);
 }
 function getPointerElemById(id){
- return $('.ihq-pointer[data-id="'+id+'"]'); 
+ return $('.owo-pointer[data-id="'+id+'"]'); 
 }
 
 // Event handlers that does not need to be synced.
@@ -231,7 +231,7 @@ function getPointerElemById(id){
 window.addEventListener('hashchange', function(){
   var id;
 
-  $$('.ihq-pointer', null, true).forEach(function(pointerElem){
+  $$('.owo-pointer', null, true).forEach(function(pointerElem){
     pointerElem.remove();
   });
 
@@ -266,5 +266,5 @@ $('.cancel-add-question', toolboxElem).addEventListener('click', function(e){
 });
 
 thumbElem.addEventListener('click', function(){
-  $('body').classList.toggle('ihq-toolbox-active');
+  $('body').classList.toggle('owo-toolbox-active');
 });
