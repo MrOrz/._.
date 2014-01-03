@@ -7,31 +7,67 @@
     <link rel='stylesheet' href='/stylesheets/index.css' />
   </head>
   <body>
-    <div class="logo"></div>
+    <!-- <div class="logo"></div> -->
     <div class="row">
-      <h1>我有問題 iHaveQuestion</h1>
-
+      <div class="head-title">
+        <div class="title"><h1>我有問題<br><small>iHaveQuestion</small></h1></div>
+        <div class="logos">
+          <img src="../images/owo.png" class="jump-logo">
+          <img src="../images/owo_common_2.png" class="owo-common">
+          <img src="../images/owo_common.png" class="owo-common_2">
+          <img src="../images/owo_teacher.png" class="owo-teacher">
+        </div>
+      </div>
+      <div class ="back"></div>
+      <!-- <div class="line"></div> -->
+      <div style="text-align:center;"><button type="submit" class="btn btn-info add-new-number">立即新增投影片編號</button></div>
+      
       <% if(flash){ %>
         <p class="alert alert-<%= flash.type %>"><%= flash.text %></p>
       <% } %>
-
+      <div class="intro">
+        <p>專為使用 HTML Slide 上課的講師所設計。當講師在上課時，同學可以透過「我有問題」，即時且匿名發問，也可以即時看見別人的問題，並且在共鳴時可以按下+1。講師可以同時看到同學的問題在哪，以及有多少人有同樣的問題。</p>
+      </div>
+      <div class="container">
+        <div class="student-title">學生</div>
+        <div class="student student-image-div">
+          <img src="../images/owo.png" class="student-image">
+        </div>
+        <div class="student student-word">
+          <!-- <div class="student">學生</div> -->
+          <ul>
+          <li><div class="spot"><button class="btn btn-warning">我有問題！</button></div>拉出左方選單，頂端點選按鈕</li>
+          <li><div class="spot"><img src="../images/marker.png"></div>在投影片有問題的地方點一下即可標記位置</li>
+          <li><div class="spot"><button class="btn btn-primary">送出</button></div>接著輸入訊息後即可送出</li>
+          <li><div class="spot"><div class="plus-one spot"><span>1</span></div></div>可即時看見其他人提出問題，按下+1</li>
+          </ul>
+        </div>
+      </div>
+      <div class="container">
+        <div class="student-title">講師</div>
+        <div class="teacher">
+          <ul>
+            <li>展開左方畫面可看到同學發問的問題及問題人數</li>
+            <li>點選問題可跳至問題標記的位置</li>
+            <li>問題解決之後可勾選讓問題消失</li>
+          </ul>
+        </div>
+        <div class="teacher teacher-image-div"><img src="../images/owo_teacher.png" class="teacher-image"></div>
+      </div>
       <div class="section">
-        <legend>請複製下面 HTML 標記到 <code>&lt;/body&gt;</code> 前：</legend>
-        <pre class="script">
-&lt;script type="text/javascript"
-src="<%= embedUrl %>" id="°▽°ﾉ" data-room-id="<%= roomIds[roomIds.length-1] %>"&gt;&lt;/script&gt;
-        </pre>
+        <legend>講師請複製下面 HTML 標記到 <code>&lt;/body&gt;</code> 前即可開始上課：</legend>
+        <div class="script">&lt;script type="text/javascript" src="<%= embedUrl %>" id="°▽°ﾉ" data-room-id="<%= roomIds[roomIds.length-1] %>"&gt;&lt;/script&gt;
+        </div>
       </div>
 
-      <h4>投影片編號</h4>
+      <h4>講師擁有投影片編號</h4>
       <p>以下為您主講的投影片編號。點進同一份投影片的老師和學生，會看到同一組問題。</p>
       <ul>
         <% roomIds.forEach(function(roomId){ %>
-          <li><%= roomId %></li>
+          <li class="number"><%= roomId %></li>
         <% }); %>
       </ul>
-
-      <form style="display: inline-block;" method="post" action="add">
+      <form style="display: inline-block; margin-left:25%;" method="post" action="add">
         <button type="submit" class="btn btn-info">
           取得新投影片編號
         </button>
@@ -42,7 +78,7 @@ src="<%= embedUrl %>" id="°▽°ﾉ" data-room-id="<%= roomIds[roomIds.length-1
         </button>
       </form>
       <br><br>
-      <div class="alert alert-block alert-info">
+      <div class="alert alert-block alert-info" style="margin-top:40px;">
         <h4>Cookie 的使用</h4>
         <p>我們使用您正瀏覽此頁面之 Cookie 來判斷您是否為講者、並顯示講者介面。</p>
         <p>若講者要在自己的電腦上顯示學生介面，請使用無痕 / 隱私瀏覽模式。</p>
