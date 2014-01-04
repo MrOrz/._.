@@ -256,8 +256,8 @@ $('body').addEventListener('click', function(e){
   if(askState !== 1){ return; }
 
   setState(2);
-  questionBlockElem.style.left = e.pageX + 'px';
-  questionBlockElem.style.top = e.pageY + 'px';
+  questionBlockElem.style.left = (e.pageX / window.innerWidth) * 100 + '%';
+  questionBlockElem.style.top = (e.pageY / window.innerHeight) * 100 + '%';
 });
 
 $('.cancel-add-question', toolboxElem).addEventListener('click', function(e){
