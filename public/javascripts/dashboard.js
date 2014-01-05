@@ -7,7 +7,7 @@ socket.on('init', function(data){
 });
 
 var view = new QuestionView({
-  el: $(".ihq-question-queue"),
+  el: $(".owo-question-queue"),
   collection: questionCollection
 });
 
