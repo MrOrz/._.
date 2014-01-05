@@ -3,6 +3,10 @@ html, body{
   min-height: 100%;
 }
 
+p {
+  font-size: 12px;
+} 
+
 .logo{
   width: 671px;
   height: 473px;
@@ -36,7 +40,7 @@ html, body{
 }
     
 @-webkit-keyframes logo {
-  10% {
+  10% { 
     transform: translate(0, 0%);
     -webkit-transform: translate(0, 0%);
     background-size: 100% 100%;
@@ -49,8 +53,201 @@ html, body{
   }
 }
 
-.row{
+.row {
   max-width: 600px;
-  width: 50%;
-  margin-left: 50%;
+  width: 70%;
+  margin: 0 auto;
 }
+
+.head-title .common {
+  height: 65px;
+}
+
+.head-title .title {
+  line-height: 2.5em
+}
+.head-title .title h1 {
+  text-align: center;
+  font-size: 4.5em;
+  color: rgb(84, 110, 122);
+  text-shadow: 0px 1px 2px #79A399;
+}
+.head-title .title small {
+  font-size: 35px;
+  margin-left: 120px;
+  color: rgb(105, 157, 170);
+  text-shadow: 0px -1px 1px #DDD;
+}
+.jump-logo {
+  height: 105px;
+}
+
+.logos {
+  height: 105px;
+  position: relative;
+  background: white;
+  z-index: 1;
+}
+
+.jump-logo {
+  float: left;
+  margin-top: -30px;
+  transition: opacity 0.5s ease;
+  animation:logo 1s infinite;
+  -webkit-animation:logo 1s infinite;  /*Safari and Chrome */
+  animation-direction:alternate;
+  -webkit-animation-direction:alternate; /* Safari and Chrome */
+}
+
+img.owo-teacher {
+  float: right;
+  margin-top: -60px;
+  height: 90px;
+}
+img.owo-common, img.owo-common_2 {
+  height: 90px;
+  position: absolute;
+  opacity: 0.6;
+}
+img.owo-common {
+  left: 150px;
+}
+img.owo-common_2 {
+  left: 250px;
+}
+
+@keyframes logo {
+0%   {margin-top:-110px;}
+100% {margin-top:-40px;}
+}
+
+@-webkit-keyframes logo /* Safari and Chrome */{
+0%   {margin-top:-110px;}
+100% {margin-top:-30px;}
+}
+
+.back {
+  width: 500px;
+  height: 10px ;
+  box-shadow: 0 1px 3px #888;
+  margin: -10px 0 25px 40px;
+  float: left;
+  z-index: -1;
+  opacity: 0.5;
+}
+
+.add-new-number {
+  height: 38px;
+}
+
+.intro {
+  width: 450px;
+  margin: 0px auto;
+}
+.container {
+  margin: 65px 0;
+}
+
+.student-title {
+  font-size: 25px;
+  color: rgb(84, 110, 122);
+  padding-bottom: 5px;
+  padding-left: 20px;
+}
+.student, .teacher {
+  display: inline-block;
+  vertical-align: middle;
+}
+.student-image, .teacher-image {
+  position: absolute;
+  margin-top: 0px;
+  height: 100px;
+  animation: student-image 0.7s infinite;
+  -webkit-animation: student-image 0.7s infinite;  /*Safari and Chrome */
+  animation-direction: alternate;
+  -webkit-animation-direction: alternate; /* Safari and Chrome */
+}
+.student-image-div, .teacher-image-div {
+  height: 150px;
+  width: 150px;
+  margin-left: 30px;
+}
+.student-word {
+  margin-left: -15px;
+}
+
+@keyframes student-image {
+0%   {margin-top:-10px;}
+100% {margin-top:20px;}
+}
+
+@-webkit-keyframes student-image /* Safari and Chrome */{
+0%   {margin-top:10px;}
+100% {margin-top:20px;}
+}
+
+.spot {
+  width: 100px;
+  margin-right: 5px;
+  display: inline-block;
+  text-align: right;
+  vertical-align: middle;
+}
+
+.student ul, .teacher ul {
+  list-style-type: none;
+}
+.student li, .teacher li {
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+.student .plus-one {
+  width: 20px;
+  height: 20px;
+  background: rgba(255, 179, 179, 1);
+  border-radius: 4px;
+  display: inline-block;
+}
+.student .plus-one span{
+  margin-right: 6px;
+}
+
+.teacher-image {
+
+}
+.teacher ul {
+  padding-left: 20px;
+  padding-top: 15px;
+}
+.teacher-image-div {
+  margin-left: 50px;
+  height: 125px;
+}
+
+.script {
+  font-size: 14px;
+  font-family: courier;
+  color: #855B5B;
+  box-shadow: 0px 1px 4px rgba(153, 67, 67, 0.7);
+  padding: 15px;
+  margin-top: 15px;
+  margin-bottom: 55px;
+}
+
+ul {
+  list-style: none;
+}
+li.number {
+  font-size: 15px;
+  padding: 5px;
+  background: #FFEDED;
+  width: 55px;
+  text-align: center;
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 15px;
+  box-shadow: 0 1px 0px rgba(202, 187, 187, 0.7);
+}
+
+
+
