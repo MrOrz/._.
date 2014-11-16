@@ -67,12 +67,24 @@
 	width:150px;
 	top:0px;
   z-index: 1000000;
+  transition: transform 1s ease;
+  -moz-transition: transform 1s ease;
   -webkit-transition: transform 1s ease;
+  transform: translate(-150px, 0);
+  -moz-transform: translate(-150px, 0);
   -webkit-transform: translate(-150px, 0);
 }
 
 .owo-toolbox-active .owo-tool-box{
+  transform: translate(0px, 0);
+  -moz-transform: translate(0px, 0);
   -webkit-transform: translate(0px, 0);
+}
+
+.owo-toolbox-active .owo-tool-thumb{
+  transform: translate(150px, 0);
+  -moz-transform: translate(150px, 0);
+  -webkit-transform: translate(150px, 0);
 }
 
 .owo-tool-thumb{
@@ -84,10 +96,9 @@
   left: 0;
   top: 100px;
   z-index: 100;
-}
-
-.owo-toolbox-active .owo-tool-thumb{
-  -webkit-transform: translate(150px, 0);
+  transition: transform 1s ease;
+  -moz-transition: transform 1s ease;
+  -webkit-transition: transform 1s ease;
 }
 
 .owo-tool-box .content{
